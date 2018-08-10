@@ -1,0 +1,2 @@
+#!/bin/sh
+ls *.wav | xargs -I{} bash -c 'wav="{}"; qaac --cvbr 192 -q 2 "${wav}" -o "${wav/.wav/.m4a}"'

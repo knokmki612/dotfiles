@@ -1,0 +1,20 @@
+#!/bin/bash -x
+media="$1"
+sbj="$2"
+#if [[ ! $media =~ (radio|tv) ]] && [[ ! $sbj =~ [0-9]{7} ]]; then
+#	echo 'usage: oujsav (radio|tv) [0-9]{7}'
+#	exit 1
+#fi
+
+for i in $(seq -w 1 15); do
+	url="http://stream00.ouj.ac.jp/helixSCRMP4/?url=${media}/${sbj}/"
+	file="${sbj}_${i}.mp4"
+	case $media in
+		radio)
+			avconv -i "$url$file" -vn -c:a copy ${file/.mp4/.m4a} || exit 1
+			;;
+		tv)
+			avconv -i "$url$file" $file || exit 1
+			;;
+	esac
+done

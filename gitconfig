@@ -1,0 +1,14 @@
+[user]
+	email = knokmki612@gmail.com
+	name = Kimiaki Kuno
+[core]
+	autocrlf = input
+	editor = vim
+[sendemail]
+	smtpencryption = tls
+	smtpserver = smtp.gmail.com
+	smtpuser = knokmki612@gmail.com
+	smtpserverport = 587
+	supresscc = self
+[color]
+	ui = auto

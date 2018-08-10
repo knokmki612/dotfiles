@@ -1,0 +1,18 @@
+#!/bin/sh
+TMP_DIR="$HOME/${0##*/}.$(openssl rand -base64 12 | tr +/ -_)"
+mkdir "$TMP_DIR"
+do_exit() {
+	rm -r "$TMP_DIR"
+	exit
+}
+trap 'do_exit' 1 2 3 15
+[ ! -f "$1" ] && do_exit
+
+SRC="${1##*/}"
+SRC_NAME="${SRC%.*}"
+ffmpeg -i "$1" -vf \
+	fps=10,scale=iw:-1:flags=lanczos,palettegen "${TMP_DIR}/palette.png"
+ffmpeg -i "$1" -i "${TMP_DIR}/palette.png" -filter_complex \
+	fps=10,scale=iw:-1:flags=lanczos[x]\;[x][1:v]paletteuse "${SRC_NAME}.gif"
+
+do_exit

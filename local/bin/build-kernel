@@ -1,0 +1,2 @@
+#!/bin/sh
+sudo sh -c 'cd /usr/src/linux; make -j 8 && make modules_install && make install'

@@ -1,0 +1,18 @@
+# Input Method
+export LANG=ja_JP.utf8
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+#export XMODIFIERS=@im=fcitx
+export XMODIFIERS=none
+
+# Individual settings of each desktop environment
+if [[ "$DESKTOP_SESSION" =~ 'twm' ]]; then
+	nitrogen --restore &
+	xclock -update 1 -geometry 96x96-0+0 &
+	fcitx-autostart &
+	stalonetray &
+	dropbox-cli start &
+	cbatticon &
+	xscreensaver -no-splash &
+	start-pulse-audio-x11 &
+fi

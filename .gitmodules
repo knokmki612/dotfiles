@@ -1,0 +1,9 @@
+[submodule "anyenv"]
+	path = anyenv
+	url = https://github.com/riywo/anyenv.git
+[submodule "vim"]
+	path = vim
+	url = git@github.com:knokmki612/vim-config.git
+[submodule "dotfile-installer"]
+	path = dotfile-installer
+	url = git@github.com:knokmki612/dotfile-installer.git
