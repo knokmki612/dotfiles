@@ -1,4 +1,4 @@
-. /etc/skel/.bash_profile
+[ "$(uname -a)" = "Linux" ] && . /etc/skel/.bash_profile
 
 export HISTSIZE=100000
 export HISTTIMEFORMAT='%Y/%m/%d %H:%M:%S '
