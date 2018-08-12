@@ -1,4 +1,4 @@
-[ "$(uname)" = "Linux" ] && . /etc/skel/.bash_profile
+[[ "$(uname)" = "Linux" ]] && . /etc/skel/.bashrc
 
 confirm_rm() {
 	echo "rm $@"

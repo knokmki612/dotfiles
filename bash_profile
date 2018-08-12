@@ -1,6 +1,12 @@
-[ "$(uname)" = "Linux" ] && . /etc/skel/.bash_profile
+[[ "$(uname)" = "Linux" ]] && [[ -f "/etc/skel/.bash_profile" ]] && {
+	. /etc/skel/.bash_profile
+}
 
-uname -a | grep "Microsoft" && {
+[[ "$(uname)" = "Linux" ]] && [[ -f "/etc/skel/.profile" ]] && {
+	. /etc/skel/.profile
+}
+
+[[ "$(uname -a)" =~ "Microsoft"  ]] && {
 	export DISPLAY="localhost:0.0"
 }
 
