@@ -1,4 +1,4 @@
-. /etc/skel/.bashrc
+[ "$(uname)" = "Linux" ] && . /etc/skel/.bash_profile
 
 confirm_rm() {
 	echo "rm $@"
@@ -56,5 +56,3 @@ alias cp="confirm_cp"
 alias mv="confirm_mv"
 
 alias sfossdk='/srv/mer/sdks/sfossdk/mer-sdk-chroot'
-
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
