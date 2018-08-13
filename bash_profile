@@ -21,6 +21,7 @@ export RUBY_CONFIGURE_OPTS="--enable-shared"
 export GOPATH="$HOME/.go"
 
 PATH="/usr/games/bin:$PATH"
+PATH="$HOME/SDK/Qt/5.9.1/gcc_64/bin:$PATH"
 PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 PATH="$HOME/.anyenv/bin:$PATH"
 PATH="$GOPATH/bin:$PATH"
