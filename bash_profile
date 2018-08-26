@@ -6,6 +6,10 @@
 	. /etc/skel/.profile
 }
 
+[[ -f "$HOME/.homebrew_profile" ]] && {
+	. "$HOME/.homebrew_profile"
+}
+
 [[ "$(uname -a)" =~ "Microsoft"  ]] && {
 	export DISPLAY="localhost:0.0"
 }
