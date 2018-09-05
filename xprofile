@@ -6,7 +6,7 @@ export QT_IM_MODULE=fcitx
 export XMODIFIERS=none
 
 # for flatpak
-export XDG_RUNTIME_DIR="/run/user/$(id -u)"
+export XDG_RUNTIME_DIR="/run/user/$UID"
 
 # Individual settings of each desktop environment
 if [[ "$DESKTOP_SESSION" =~ 'twm' ]]; then
