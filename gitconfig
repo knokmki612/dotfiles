@@ -1,6 +1,7 @@
 [user]
 	email = knokmki612@gmail.com
 	name = Kimiaki Kuno
+	signingkey = 41788B9917B2D4DBE62E0B60FA5BD6734F11AB77
 [core]
 	autocrlf = input
 	editor = vim
