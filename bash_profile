@@ -26,6 +26,7 @@ export GOPATH="$HOME/.go"
 
 PATH="/usr/games/bin:$PATH"
 PATH="$HOME/SDK/Qt/5.9.1/gcc_64/bin:$PATH"
+PATH="$HOME/SDK/julia/bin:$PATH"
 PATH="$HOME/.anyenv/bin:$PATH"
 PATH="$GOPATH/bin:$PATH"
 PATH="$HOME/.local/bin:$PATH"
