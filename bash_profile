@@ -35,6 +35,4 @@ PATH="$HOME/bin:$PATH"
 PATH="$HOME/.local/bin:$PATH"
 export PATH
 
-set bell-style none
-
 eval "$(anyenv init -)"
