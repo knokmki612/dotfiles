@@ -58,3 +58,5 @@ alias mv="confirm_mv"
 alias sfossdk='/srv/mer/sdks/sfossdk/mer-sdk-chroot'
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+export SDKMAN_DIR="/var/home/kimiaki/.sdkman"
+[[ -s "/var/home/kimiaki/.sdkman/bin/sdkman-init.sh" ]] && source "/var/home/kimiaki/.sdkman/bin/sdkman-init.sh"
