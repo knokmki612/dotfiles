@@ -3,8 +3,9 @@
 alias rm="confirm rm"
 alias cp="confirm cp"
 alias mv="confirm mv"
+alias sfossdk='/srv/mer/sdks/sfossdk/mer-sdk-chroot'
 
-
+PATH="$GOPATH/bin:$PATH"
 
 [[ ! "$PATH" =~ "$HOME/.yarn/bin" ]] && {
   PATH="$HOME/.config/yarn/global/node_modules/.bin:$PATH"
@@ -12,7 +13,6 @@ alias mv="confirm mv"
 }
 
 export PATH
-alias sfossdk='/srv/mer/sdks/sfossdk/mer-sdk-chroot'
 
 export SDKMAN_DIR="/var/home/kimiaki/.sdkman"
 [[ -s "/var/home/kimiaki/.sdkman/bin/sdkman-init.sh" ]] && source "/var/home/kimiaki/.sdkman/bin/sdkman-init.sh"
