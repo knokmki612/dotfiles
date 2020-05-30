@@ -1,18 +1,24 @@
 # Input Method
 export LANG=ja_JP.utf8
-export GTK_IM_MODULE=fcitx
-export QT_IM_MODULE=fcitx
-#export XMODIFIERS=@im=fcitx
-export XMODIFIERS=none
+
+if commend -v fcitx >/dev/null
+then
+  export GTK_IM_MODULE=fcitx
+  export QT_IM_MODULE=fcitx
+elif command -v ibus >/dev/null
+then
+  export GTK_IM_MODULE=ibus
+  export QT_IM_MODULE=ibus
+fi
 
 # Individual settings of each desktop environment
-if [[ "$DESKTOP_SESSION" =~ 'twm' ]]; then
-	nitrogen --restore &
-	xclock -update 1 -geometry 96x96-0+0 &
-	fcitx-autostart &
-	stalonetray &
-	dropbox-cli start &
-	cbatticon &
-	xscreensaver -no-splash &
-	start-pulse-audio-x11 &
-fi
+[[ "$DESKTOP_SESSION" =~ 'twm' ]] && {
+  nitrogen --restore &
+  xclock -update 1 -geometry 96x96-0+0 &
+  fcitx-autostart &
+  stalonetray &
+  dropbox-cli start &
+  cbatticon &
+  xscreensaver -no-splash &
+  start-pulse-audio-x11 &
+}
