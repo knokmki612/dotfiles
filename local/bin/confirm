@@ -1,0 +1,23 @@
+#!/bin/sh
+
+command="$1"
+shift
+
+echo "$command $@"
+echo "are you sure you want to process these args by ${command} command?"
+
+while true; do
+  echo -n "(y/n): "
+  read response
+  if echo "$response" | grep -sq '^[yn]$'
+  then
+    break
+  fi
+done
+
+if [ "$response" = "y" ]
+then
+  $command "$@"
+else
+  echo "execution was prevented"
+fi
