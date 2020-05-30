@@ -10,8 +10,8 @@
 	. "$HOME/.homebrew_profile"
 }
 
-[[ "$(uname -a)" =~ "Microsoft"  ]] && {
-	export DISPLAY="localhost:0.0"
+[[ "$(uname -a)" =~ "microsoft"  ]] && {
+	export DISPLAY="$(cat /etc/resolv.conf | grep "nameserver" | cut -d ' ' -f 2):0.0"
 }
 
 [[ -f "$HOME/bin/docker" ]] && {
