@@ -5,6 +5,7 @@
 [core]
 	autocrlf = input
 	editor = vim
+	excludesfile = /home/kimiaki/.gitignore.global
 [sendemail]
 	smtpencryption = tls
 	smtpserver = smtp.gmail.com
