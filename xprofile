@@ -1,7 +1,7 @@
 # Input Method
 export LANG=ja_JP.utf8
 
-if commend -v fcitx >/dev/null
+if command -v fcitx >/dev/null
 then
   export GTK_IM_MODULE=fcitx
   export QT_IM_MODULE=fcitx
