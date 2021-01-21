@@ -28,6 +28,10 @@ export RUBY_CONFIGURE_OPTS="--enable-shared"
 
 export EDITOR="/usr/bin/env vim"
 
+[[ -z "$TMPDIR" ]] && {
+  export TMPDIR="/tmp"
+}
+
 PATH="$HOME/SDK/Qt/5.9.1/gcc_64/bin:$PATH"
 PATH="$HOME/SDK/julia/bin:$PATH"
 PATH="$HOME/.anyenv/bin:$PATH"
