@@ -2,12 +2,19 @@
 
 NVIM_DIR="${HOME}/.config/nvim"
 VIM_DIR="${HOME}/.vim"
-VIM_CONFIG="${VIM_DIR}/vimrc"
 
 mkdir -p "${NVIM_DIR}" "${NVIM_DIR}/colors"
 
-[ -f "${VIM_CONFIG}" ] && {
-  ln -s "$VIM_CONFIG" "${NVIM_DIR}/init.vim"
+[ -f "${VIM_DIR}/vimrc" ] && {
+  ln -sf "${VIM_DIR}/vimrc" "${NVIM_DIR}/init.vim"
+}
+
+[ -d "${VIM_DIR}/ftplugin" ] && {
+  ln -sf "${VIM_DIR}/ftplugin" "${NVIM_DIR}/"
+}
+
+[ -d "${VIM_DIR}/ftdetect" ] && {
+  ln -sf "${VIM_DIR}/ftdetect" "${NVIM_DIR}/"
 }
 
 colorscheme=$(
@@ -17,5 +24,5 @@ colorscheme=$(
 )
 
 [ -n "${colorscheme}" ] && {
-  ln -s "$colorscheme" "${NVIM_DIR}/colors/$(basename ${colorscheme})"
+  ln -sf "$colorscheme" "${NVIM_DIR}/colors/$(basename ${colorscheme})"
 }
