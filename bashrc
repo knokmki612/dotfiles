@@ -14,5 +14,5 @@ PATH="$GOPATH/bin:$PATH"
 
 export PATH
 
-export SDKMAN_DIR="/var/home/kimiaki/.sdkman"
-[[ -s "/var/home/kimiaki/.sdkman/bin/sdkman-init.sh" ]] && source "/var/home/kimiaki/.sdkman/bin/sdkman-init.sh"
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
