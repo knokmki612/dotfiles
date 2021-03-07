@@ -36,6 +36,10 @@
   PATH="/usr/games/bin:$PATH"
 }
 
+[[ -d "$HOME/.npm-global/bin" ]] && {
+  PATH="$HOME/.npm-global/bin:$PATH"
+}
+
 [[ -d "$HOME/.anyenv/bin" ]] && {
   PATH="$HOME/.anyenv/bin:$PATH"
   eval "$(anyenv init -)"
