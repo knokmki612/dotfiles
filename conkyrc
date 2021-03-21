@@ -76,8 +76,6 @@ ${color grey}CPU Usage:$color $cpu%
 $cpugraph
 ${color grey}Disk I/O:$color $diskio
 ${diskiograph sda}
-${color grey}Networking:
-Up:$color ${upspeed wlp3s0} ${color grey} - Down:$color ${downspeed wlp3s0}
 $stippled_hr
 ${color grey}Name              PID    CPU%   MEM%
 ${color lightgrey} ${top name 1} ${top pid 1} ${top cpu 1} ${top mem 1}
