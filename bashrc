@@ -40,6 +40,12 @@
   PATH="$HOME/.npm-global/bin:$PATH"
 }
 
+[[ -d "$HOME/.anyenv/envs/pyenv" ]] && {
+  export PYENV_ROOT="$HOME/.anyenv/envs/pyenv"
+  PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init --path)"
+}
+
 [[ -d "$HOME/.anyenv/bin" ]] && {
   PATH="$HOME/.anyenv/bin:$PATH"
   eval "$(anyenv init -)"
