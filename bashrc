@@ -1,3 +1,7 @@
+[[ -f "/etc/skel/.bashrc" ]] && {
+  source "/etc/skel/.bashrc"
+}
+
 [[ -f "$HOME/.homebrew_profile" ]] && {
 	source "$HOME/.homebrew_profile"
 }
