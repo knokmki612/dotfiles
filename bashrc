@@ -67,6 +67,8 @@ export RUBY_CONFIGURE_OPTS="--enable-shared"
 
 export EDITOR="/usr/bin/env vim"
 
+export GIT_EDITOR="$EDITOR"
+
 [[ -f "$HOME/.bashrc_override" ]] && {
 	source "$HOME/.bashrc_override"
 }
