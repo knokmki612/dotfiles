@@ -13,11 +13,6 @@
   export TMPDIR="/tmp"
 }
 
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && {
-  export SDKMAN_DIR="$HOME/.sdkman"
-  source "$HOME/.sdkman/bin/sdkman-init.sh"
-}
-
 [[ ! "$PATH" =~ "$HOME/bin" ]] && {
   PATH="$HOME/bin:$PATH"
 }
@@ -39,15 +34,9 @@
   PATH="$HOME/.npm-global/bin:$PATH"
 }
 
-[[ -d "$HOME/.anyenv/envs/pyenv" ]] && {
-  export PYENV_ROOT="$HOME/.anyenv/envs/pyenv"
-  PATH="$PYENV_ROOT/bin:$PATH"
-  eval "$(pyenv init --path)"
-}
-
-[[ -d "$HOME/.anyenv/bin" ]] && {
-  PATH="$HOME/.anyenv/bin:$PATH"
-  eval "$(anyenv init -)"
+[[ -d "$HOME/.asdf" ]] && {
+  source "$HOME/.asdf/asdf.sh"
+  source "$HOME/.asdf/completions/asdf.bash"
 }
 
 export PATH
