@@ -2,14 +2,9 @@
   source "/etc/skel/.bashrc"
 }
 
-[[ -f "$HOME/.homebrew_profile" ]] && {
-	source "$HOME/.homebrew_profile"
-}
-
 [[ -f "$HOME/bin/docker" ]] && {
   export DOCKER_HOST="unix:///run/user/1000/docker.sock"
 }
-
 [[ "$(uname -a)" =~ "microsoft"  ]] && {
 	export DISPLAY="$(cat /etc/resolv.conf | grep "nameserver" | cut -d ' ' -f 2):0.0"
 }
@@ -71,3 +66,7 @@ export DEBFULLNAME="Kimiaki Kuno"
 export RUBY_CONFIGURE_OPTS="--enable-shared"
 
 export EDITOR="/usr/bin/env vim"
+
+[[ -f "$HOME/.bashrc_override" ]] && {
+	source "$HOME/.bashrc_override"
+}
