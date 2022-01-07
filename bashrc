@@ -21,17 +21,8 @@
   PATH="$HOME/.local/bin:$PATH"
 }
 
-[[ ! "$PATH" =~ "$HOME/.yarn/bin" ]] && {
-  PATH="$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-  PATH="$HOME/.yarn/bin:$PATH"
-}
-
 [[ -d "/usr/games/bin" ]] && {
   PATH="/usr/games/bin:$PATH"
-}
-
-[[ -d "$HOME/.npm-global/bin" ]] && {
-  PATH="$HOME/.npm-global/bin:$PATH"
 }
 
 [[ -d "$HOME/.asdf" ]] && {
