@@ -49,6 +49,8 @@ export DEBFULLNAME="Kimiaki Kuno"
 
 export RUBY_CONFIGURE_OPTS="--enable-shared"
 
+export DOCKER_BUILDKIT=0
+
 export EDITOR="/usr/bin/env vim"
 
 export GIT_EDITOR="$EDITOR"
