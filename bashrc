@@ -30,6 +30,10 @@
   source "$HOME/.asdf/completions/asdf.bash"
 }
 
+[[ -d "$HOME/SDK/SailfishOS/bin" ]] && {
+  PATH="$HOME/SDK/SailfishOS/bin:$PATH"
+}
+
 export PATH
 
 alias rm="confirm rm"
