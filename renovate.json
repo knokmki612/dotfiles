@@ -5,5 +5,5 @@
   ],
   "asdf": {
     "fileMatch": ["(^|/)tool-versions$"]
-  },
+  }
 }
