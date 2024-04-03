@@ -58,3 +58,11 @@ export GIT_EDITOR="$EDITOR"
 [[ -f "$HOME/.bashrc_override" ]] && {
 	source "$HOME/.bashrc_override"
 }
+
+# pnpm
+export PNPM_HOME="/var/home/kimiaki/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
