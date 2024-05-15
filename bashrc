@@ -25,11 +25,6 @@
   PATH="/usr/games/bin:$PATH"
 }
 
-[[ -d "$HOME/.asdf" ]] && {
-  source "$HOME/.asdf/asdf.sh"
-  source "$HOME/.asdf/completions/asdf.bash"
-}
-
 [[ -d "$HOME/SDK/SailfishOS/bin" ]] && {
   PATH="$HOME/SDK/SailfishOS/bin:$PATH"
 }
@@ -57,6 +52,10 @@ export GIT_EDITOR="$EDITOR"
 
 [[ -f "$HOME/.bashrc_override" ]] && {
 	source "$HOME/.bashrc_override"
+}
+
+[[ -f "$HOME/.local/bin/mise" ]] && {
+  eval "$($HOME/.local/bin/mise activate bash)"
 }
 
 # pnpm
