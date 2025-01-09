@@ -11,4 +11,7 @@
       },
       "terminal.integrated.defaultProfile.linux": "host-toolbox",
       "terminal.integrated.fontFamily": "Dejavu Sans Mono",
+      "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+      },
 }
