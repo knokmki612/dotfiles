@@ -2,4 +2,4 @@ nodejs 22.20.0
 java openjdk-17.0.1
 hugo 0.151.0
 deno 2.5.4
-uv 0.9.1
+uv 0.9.6
