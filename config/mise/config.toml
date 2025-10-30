@@ -5,6 +5,7 @@ idiomatic_version_file_enable_tools = ["node"]
 [tools]
 gh = "latest"
 "npm:@anthropic-ai/claude-code" = "latest"
+"npm:@ccusage/codex" = "latest"
 "npm:@openai/codex" = "latest"
 "npm:ccusage" = "latest"
 "npm:rulesync" = "latest"
