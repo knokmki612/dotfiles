@@ -1,0 +1,8 @@
+#!/bin/sh
+if ! which rulesync
+then
+  mise install
+fi
+pushd "${HOME}/.config/agentic-ai"
+rulesync generate
+popd
