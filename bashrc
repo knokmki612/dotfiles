@@ -48,6 +48,8 @@ export EDITOR="/usr/bin/env vim"
 
 export GIT_EDITOR="$EDITOR"
 
+export CLAUDE_CONFIG_DIR="$HOME/.claude"
+
 [[ -f "$HOME/.bashrc_override" ]] && {
 	source "$HOME/.bashrc_override"
 }
