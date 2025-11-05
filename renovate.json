@@ -1,9 +1,11 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:base"
+    "config:recommended"
   ],
   "asdf": {
-    "fileMatch": ["(^|/)tool-versions$"]
+    "managerFilePatterns": [
+      "/(^|/)tool-versions$/"
+    ]
   }
 }
