@@ -19,3 +19,5 @@
 	defaultBranch = main
 [commit]
 	gpgsign = true
+[alias]
+	cs = commit --signoff
