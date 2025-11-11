@@ -50,6 +50,10 @@ export GIT_EDITOR="$EDITOR"
 
 export CLAUDE_CONFIG_DIR="$HOME/.claude"
 
+[[ -f "/var/lib/flatpak/exports/bin/com.google.Chrome" ]] && {
+  export CHROME_PATH="/var/lib/flatpak/exports/bin/com.google.Chrome"
+}
+
 [[ -f "$HOME/.bashrc_override" ]] && {
 	source "$HOME/.bashrc_override"
 }
