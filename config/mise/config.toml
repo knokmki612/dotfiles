@@ -4,6 +4,7 @@ idiomatic_version_file_enable_tools = ["node"]
 
 [tools]
 "aqua:cli/cli" = "latest"
+"aqua:jdx/usage" = "latest"
 "npm:@anthropic-ai/claude-code" = "latest"
 "npm:@ccusage/codex" = "latest"
 "npm:@github/copilot" = "latest"
@@ -11,4 +12,3 @@ idiomatic_version_file_enable_tools = ["node"]
 "npm:ccusage" = "latest"
 "npm:rulesync" = "latest"
 "npm:wrangler" = "latest"
-usage = "latest"
