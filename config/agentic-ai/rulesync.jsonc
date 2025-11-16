@@ -7,6 +7,5 @@
   "global": true,
   "simulatedCommands": true,
   "simulatedSubagents": true,
-  "modularMcp": false
+  "modularMcp": true
 }
-
