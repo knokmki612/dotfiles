@@ -5,9 +5,6 @@
 [[ -f "$HOME/bin/docker" ]] && {
   export DOCKER_HOST="unix:///run/user/1000/docker.sock"
 }
-[[ "$(uname -a)" =~ "microsoft"  ]] && {
-	export DISPLAY="$(cat /etc/resolv.conf | grep "nameserver" | cut -d ' ' -f 2):0.0"
-}
 
 [[ -z "$TMPDIR" ]] && {
   export TMPDIR="/tmp"
