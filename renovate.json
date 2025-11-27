@@ -3,9 +3,12 @@
   "extends": [
     "config:recommended"
   ],
-  "asdf": {
+  "packageRules": [{
+    "minimumReleaseAge": "7 days"
+  }],
+  "mise": {
     "managerFilePatterns": [
-      "/(^|/)tool-versions$/"
+      "/(^|/)mise\/config\\.toml$/"
     ]
   }
 }
