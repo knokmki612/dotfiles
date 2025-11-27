@@ -1,8 +1,13 @@
-#!/bin/sh
+#!/bin/bash
 if ! which rulesync
 then
   mise install
 fi
-pushd "${HOME}/.config/agentic-ai"
+CONFIG_DIR="${HOME}/.config/agentic-ai"
+if [ ! -d "$CONFIG_DIR}" ]
+then
+  mkdir -p "${CONFIG_DIR}"
+fi
+pushd "${CONFIG_DIR}"
 rulesync generate
 popd
