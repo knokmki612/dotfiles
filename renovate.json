@@ -5,10 +5,5 @@
   ],
   "packageRules": [{
     "minimumReleaseAge": "7 days"
-  }],
-  "mise": {
-    "managerFilePatterns": [
-      "/(^|/)mise\/config\\.toml$/"
-    ]
-  }
+  }]
 }
