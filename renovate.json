@@ -1,10 +1,14 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:recommended"
-  ],
-  "packageRules": [{
-    "matchDatasources": ["npm"],
-    "minimumReleaseAge": "7 days"
-  }]
+  "extends": ["config:recommended"],
+  "packageRules": [
+    {
+      "matchDatasources": ["npm"],
+      "minimumReleaseAge": "7 days"
+    },
+    {
+      "matchPackageNames": ["java"],
+      "allowedVersions": "!/\\.LTS$/"
+    }
+  ]
 }
