@@ -3,7 +3,7 @@ experimental = true
 idiomatic_version_file_enable_tools = ["node"]
 
 [tools]
-nodejs = "24.11.1"
+nodejs = "24.12.0"
 java = "openjdk-25.0.1"
 hugo = "0.152.2"
 deno = "2.5.6"
