@@ -5,7 +5,7 @@ idiomatic_version_file_enable_tools = ["node"]
 [tools]
 nodejs = "24.12.0"
 java = "openjdk-25.0.1"
-hugo = "0.152.2"
+hugo = "0.153.3"
 deno = "2.6.1"
 uv = "0.9.18"
 "aqua:cli/cli" = "latest"
