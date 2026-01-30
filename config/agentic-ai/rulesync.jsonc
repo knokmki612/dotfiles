@@ -1,12 +1,10 @@
 {
   "$schema": "https://raw.githubusercontent.com/dyoshikawa/rulesync/refs/heads/main/config-schema.json",
   "targets": ["copilot", "claudecode", "codexcli"],
-  "features": ["rules", "ignore", "mcp", "commands", "subagents"],
+  "features": ["rules", "ignore", "mcp", "subagents", "skills"],
   "baseDirs": ["."],
   "delete": true,
   "verbose": true,
   "global": true,
-  "simulatedCommands": true,
-  "simulatedSubagents": true,
-  "modularMcp": true
+  "modularMcp": true,
 }
