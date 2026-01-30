@@ -4,9 +4,14 @@ then
   mise install
 fi
 CONFIG_DIR="${HOME}/.config/agentic-ai"
-if [ ! -d "$CONFIG_DIR}" ]
+if [ ! -d "${CONFIG_DIR}" ]
 then
   mkdir -p "${CONFIG_DIR}"
+fi
+RULESYNC_DIR="${HOME}/.rulesync"
+if [ ! -d "${RULESYNC_DIR}" ]
+then
+  ln -s "${CONFIG_DIR}/.rulesync" "${RULESYNC_DIR}"
 fi
 pushd "${CONFIG_DIR}"
 rulesync generate
