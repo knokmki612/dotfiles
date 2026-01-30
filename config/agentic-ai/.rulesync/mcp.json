@@ -24,20 +24,6 @@
       "command": "npx",
       "args": ["-y", "@upstash/context7-mcp"],
       "env": {}
-    },
-    "chrome-devtools": {
-      "description": "Controls browsers using Chrome DevTools Protocol for automation and debugging. Enables web scraping, performance analysis, and browser interaction. Needed when automating browser tasks, debugging web applications, capturing screenshots, or analyzing network traffic and console logs.",
-      "type": "stdio",
-      "command": "npx",
-      "args": ["-y", "chrome-devtools-mcp@latest"],
-      "env": {}
-    },
-    "playwright": {
-      "description": "Provides browser automation using Playwright framework for testing and interaction. Supports cross-browser testing, form filling, and page navigation. Needed for end-to-end testing, automated UI testing, web application interaction, or performing complex browser workflows across multiple browsers.",
-      "type": "stdio",
-      "command": "npx",
-      "args": ["-y", "@playwright/mcp@latest"],
-      "env": {}
     }
   }
 }
