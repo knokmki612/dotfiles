@@ -16,6 +16,6 @@ idiomatic_version_file_enable_tools = ["node"]
 "npm:wrangler" = "latest"
 deno = "2.6.6"
 hugo = "0.155.2"
-java = "openjdk-25.0.1"
+java = "openjdk-25.0.2+10.0.LTS"
 nodejs = "24.13.0"
 uv = "0.9.28"
