@@ -4,7 +4,8 @@
       "Bash(gh api:*)",
       "Bash(gh issue view:*)",
       "Bash(gh pr view:*)",
-      "mcp__modular-mcp__call-modular-tool"
+      "mcp__modular-mcp__call-modular-tool",
+      "mcp__modular-mcp__get-modular-tools"
     ],
     "ask": [
       "Bash(gh api*--method:*)",
