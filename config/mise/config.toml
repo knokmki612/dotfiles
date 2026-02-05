@@ -6,6 +6,7 @@ idiomatic_version_file_enable_tools = ["node"]
 "aqua:anthropics/claude-code" = "latest"
 "aqua:cli/cli" = "latest"
 "aqua:jdx/usage" = "latest"
+"aqua:jq" = "latest"
 "npm:@ccusage/codex" = "latest"
 "npm:@github/copilot" = "latest"
 "npm:@openai/codex" = "latest"

@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gh api:*)",
+      "Bash(gh issue view:*)",
+      "Bash(gh pr view:*)",
+      "mcp__modular-mcp__call-modular-tool"
+    ],
+    "ask": [
+      "Bash(gh api*--method:*)",
+      "Bash(gh api*-X:*)",
+      "Bash(gh pr merge:*)",
+      "Bash(gh*create:*)",
+      "Bash(gh*delete:*)",
+      "Bash(git push:*)"
+    ],
+    "deny": [
+      "Bash(git clean:*)",
+      "Bash(git reset --hard:*)",
+      "Bash(git restore .)",
+      "Bash(rm:*)",
+      "Bash(rmdir:*)"
+    ]
+  }
+}

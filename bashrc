@@ -47,6 +47,16 @@ export GIT_EDITOR="$EDITOR"
 
 export CLAUDE_CONFIG_DIR="$HOME/.claude"
 
+[[ -f "$HOME/.claude/settings.json" && -f "$HOME/.claude/settings.override.json" ]] &&
+command -v jq >/dev/null 2>&1 && {
+  jq -s '.[0] * .[1]' \
+    "$HOME/.claude/settings.json" \
+    "$HOME/.claude/settings.override.json" \
+    > "$HOME/.claude/settings.json.tmp"
+
+  command mv "$HOME/.claude/settings.json.tmp" "$HOME/.claude/settings.json"
+}
+
 [[ -f "/var/lib/flatpak/exports/bin/com.google.Chrome" ]] && {
   export CHROME_PATH="/var/lib/flatpak/exports/bin/com.google.Chrome"
 }
