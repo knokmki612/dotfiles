@@ -13,6 +13,10 @@
       "Bash(gh pr merge:*)",
       "Bash(gh*create:*)",
       "Bash(gh*delete:*)",
+      "Bash(git -C*add:*)",
+      "Bash(git -C*commit:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
       "Bash(git push:*)",
       "Bash(rm:*)"
     ],
