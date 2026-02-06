@@ -6,26 +6,6 @@
       "Bash(gh pr view:*)",
       "mcp__modular-mcp__call-modular-tool",
       "mcp__modular-mcp__get-modular-tools"
-    ],
-    "ask": [
-      "Bash(gh api*--method:*)",
-      "Bash(gh api*-X:*)",
-      "Bash(gh pr merge:*)",
-      "Bash(gh*create:*)",
-      "Bash(gh*delete:*)",
-      "Bash(git -C*add:*)",
-      "Bash(git -C*commit:*)",
-      "Bash(git add:*)",
-      "Bash(git commit:*)",
-      "Bash(git push:*)",
-      "Bash(rm:*)"
-    ],
-    "deny": [
-      "Bash(git clean:*)",
-      "Bash(git reset --hard:*)",
-      "Bash(git restore .)",
-      "Bash(rm -r:*)",
-      "Bash(rmdir:*)"
     ]
   }
 }
