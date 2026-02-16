@@ -57,10 +57,6 @@ command -v jq >/dev/null 2>&1 && {
   command mv "$HOME/.claude/settings.json.tmp" "$HOME/.claude/settings.json"
 }
 
-[[ -f "/var/lib/flatpak/exports/bin/com.google.Chrome" ]] && {
-  export CHROME_PATH="/var/lib/flatpak/exports/bin/com.google.Chrome"
-}
-
 [[ -f "$HOME/.bashrc_override" ]] && {
 	source "$HOME/.bashrc_override"
 }
