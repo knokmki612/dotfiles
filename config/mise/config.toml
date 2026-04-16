@@ -19,5 +19,5 @@ idiomatic_version_file_enable_tools = ["node"]
 deno = "2.7.12"
 hugo = "0.160.1"
 java = "openjdk-25.0.1"
-nodejs = "24.14.1"
+nodejs = "24.15.0"
 uv = "0.11.6"
