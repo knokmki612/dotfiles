@@ -10,6 +10,7 @@
       "Bash(gh pr diff *)",
       "Bash(gh pr list *)",
       "Bash(gh pr view *)",
+      "Bash(gh release list *)",
       "mcp__modular-mcp__call-modular-tool",
       "mcp__modular-mcp__get-modular-tools"
     ]
