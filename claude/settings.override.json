@@ -1,9 +1,15 @@
 {
   "permissions": {
     "allow": [
-      "Bash(gh api:*)",
-      "Bash(gh issue view:*)",
-      "Bash(gh pr view:*)",
+      "Bash(gh api -X GET *)",
+      "Bash(gh api -X PATCH *)",
+      "Bash(gh api -X POST *)",
+      "Bash(gh api -X PUT *)",
+      "Bash(gh issue list *)",
+      "Bash(gh issue view *)",
+      "Bash(gh pr diff *)",
+      "Bash(gh pr list *)",
+      "Bash(gh pr view *)",
       "mcp__modular-mcp__call-modular-tool",
       "mcp__modular-mcp__get-modular-tools"
     ]
