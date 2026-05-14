@@ -8,7 +8,7 @@
     },
     {
       "matchPackageNames": ["java"],
-      "allowedVersions": "!/\\.LTS$/"
+      "versioning": "semver-partial"
     }
   ]
 }
