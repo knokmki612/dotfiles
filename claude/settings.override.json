@@ -12,6 +12,12 @@
       "Bash(gh pr list *)",
       "Bash(gh pr view *)",
       "Bash(gh release list *)",
+      "Bash(git blame *)",
+      "Bash(git diff *)",
+      "Bash(git grep *)",
+      "Bash(git log *)",
+      "Bash(git show *)",
+      "Bash(git status *)",
       "mcp__modular-mcp__call-modular-tool",
       "mcp__modular-mcp__get-modular-tools"
     ]
