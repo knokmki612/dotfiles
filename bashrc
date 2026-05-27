@@ -33,6 +33,17 @@ alias cp="confirm cp"
 alias mv="confirm mv"
 alias sfossdk="/srv/mer/sdks/sfossdk/mer-sdk-chroot"
 
+command -v toolbox >/dev/null 2>&1 && {
+  latest_ubuntu_toolbox="$(toolbox list --containers 2>/dev/null \
+    | awk '$2 ~ /^ubuntu-toolbox-/ {print $2}' \
+    | sort -V \
+    | tail -n 1)"
+  [[ -n "$latest_ubuntu_toolbox" ]] && {
+    alias playwright-cli="toolbox run -c $latest_ubuntu_toolbox playwright-cli"
+  }
+  unset latest_ubuntu_toolbox
+}
+
 export HISTSIZE=100000
 export HISTTIMEFORMAT="%Y/%m/%d %H:%M:%S "
 
