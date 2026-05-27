@@ -8,6 +8,7 @@ idiomatic_version_file_enable_tools = ["node"]
 "aqua:jdx/usage" = "latest"
 "aqua:jq" = "latest"
 "aqua:yq" = "latest"
+"npm:@axe-core/cli" = "latest"
 "npm:@ccusage/codex" = "latest"
 "npm:@github/copilot" = "latest"
 "npm:@openai/codex" = "latest"
