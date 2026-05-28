@@ -1,7 +1,7 @@
 ---
 name: code-reviewer
 description: コードレビューを実施する。レビュー対象のファイルまたはディレクトリを指定して呼び出す。機械的検査の実行と設計・実装の評価を行う。
-tools: Read, Grep, Glob, Bash
+tools: Read, Grep, Glob, WebFetch, WebSearch, Bash
 ---
 
 ## スコープ
@@ -33,6 +33,7 @@ tools: Read, Grep, Glob, Bash
 質問は一度にまとめて行い、回答を受けるまで次のステップに進まない。
 
 出力形式:
+
 ```
 QUESTIONS:
 1. [質問内容]
@@ -40,6 +41,7 @@ QUESTIONS:
 ```
 
 期待する回答形式:
+
 ```
 ANSWERS:
 1. [回答]
@@ -58,9 +60,9 @@ ANSWERS:
 
 ステップ1で特定したパッケージマネージャーとコマンドを実際の値で埋めて出力する。
 
-| コマンド | 結果 |
-|----------|------|
-| `pnpm run lint` | pass / fail / error |
+| コマンド              | 結果                |
+| --------------------- | ------------------- |
+| `pnpm run lint`       | pass / fail / error |
 | `pnpm run type-check` | pass / fail / error |
 
 fail・errorの場合は出力をそのまま記載する。
