@@ -1,0 +1,10 @@
+#!/bin/bash
+if ! which rulesync
+then
+  mise install
+fi
+rulesync fetch cloudflare/skills --features skills
+rulesync fetch google/skills --features skills
+rulesync fetch knokmki612/skills --features skills
+rulesync fetch microsoft/playwright-cli --features skills
+rulesync generate
