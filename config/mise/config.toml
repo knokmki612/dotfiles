@@ -18,4 +18,4 @@ pin = true
 "npm:wrangler" = "4.97.0"
 deno = "2.8.2"
 java = "openjdk-25"
-node = "26.3.0"
+node = "24.16.0"
