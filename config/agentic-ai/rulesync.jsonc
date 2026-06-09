@@ -1,19 +1,9 @@
 {
   "$schema": "https://github.com/dyoshikawa/rulesync/releases/latest/download/config-schema.json",
   "targets": ["copilot", "claudecode", "codexcli"],
-  "features": ["rules", "ignore", "mcp", "commands", "subagents", "skills"],
+  "features": ["rules", "ignore", "mcp", "commands", "subagents"],
   "outputRoots": ["."],
   "delete": true,
   "verbose": true,
   "global": true,
-  "sources": [
-    {
-      "source": "knokmki612/skills",
-      "skills": ["safety-deletion"],
-    },
-    {
-      "source": "microsoft/playwright-cli",
-      "skills": ["playwright-cli"],
-    },
-  ],
 }

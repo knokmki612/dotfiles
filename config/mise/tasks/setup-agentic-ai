@@ -14,6 +14,5 @@ then
   ln -s "${CONFIG_DIR}/.rulesync" "${RULESYNC_DIR}"
 fi
 pushd "${CONFIG_DIR}"
-rulesync install
 rulesync generate
 popd
