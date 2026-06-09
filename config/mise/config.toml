@@ -16,6 +16,7 @@ pin = true
 "npm:ccusage" = "20.0.6"
 "npm:rulesync" = "8.24.1"
 "npm:wrangler" = "4.97.0"
+"vfox:mise-plugins/vfox-gcloud" = "571.0.0"
 deno = "2.8.2"
 java = "openjdk-25"
 node = "24.16.0"
