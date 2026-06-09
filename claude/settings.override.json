@@ -40,9 +40,7 @@
       "Bash(playwright-cli select *)",
       "Bash(playwright-cli snapshot*)",
       "Bash(playwright-cli type *)",
-      "Bash(playwright-cli uncheck *)",
-      "mcp__modular-mcp__call-modular-tool",
-      "mcp__modular-mcp__get-modular-tools"
+      "Bash(playwright-cli uncheck *)"
     ]
   }
 }
