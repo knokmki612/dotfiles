@@ -4,10 +4,10 @@ idiomatic_version_file_enable_tools = ["node"]
 pin = true
 
 [tools]
-"aqua:anthropics/claude-code" = "2.1.168"
+"aqua:anthropics/claude-code" = "2.1.170"
 "aqua:astral-sh/uv" = "0.11.19"
 "aqua:cli/cli" = "2.93.0"
-"aqua:hugo" = "0.162.1"
+"aqua:hugo" = "0.163.0"
 "aqua:jdx/usage" = "3.4.0"
 "aqua:jq" = "1.8.1"
 "npm:@github/copilot" = "1.0.59"
