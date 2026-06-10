@@ -1,0 +1,42 @@
+#!/bin/bash
+if ! which gh
+then
+  mise install
+fi
+
+skills=(
+  "knokmki612/skills safety-deletion"
+  "microsoft/playwright-cli playwright-cli"
+  "google/skills gcloud"
+  "google/skills google-cloud-networking-observability"
+  "cloudflare/skills cloudflare"
+  "cloudflare/skills wrangler"
+)
+agents=(claude-code codex)
+
+subcommand="${1:-install}"
+
+case "$subcommand" in
+  install)
+    for skill in "${skills[@]}"
+    do
+      for agent in "${agents[@]}"
+      do
+        gh skill install $skill --agent "$agent" --scope user || exit $?
+      done
+    done
+    ;;
+  update)
+    # update は repo / --agent / --scope を取らず、スキル名のみを受け付ける
+    names=()
+    for skill in "${skills[@]}"
+    do
+      names+=("${skill#* }")
+    done
+    gh skill update "${names[@]}" || exit $?
+    ;;
+  *)
+    echo "Unknown subcommand: $subcommand" >&2
+    exit 1
+    ;;
+esac
