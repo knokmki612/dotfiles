@@ -1,0 +1,34 @@
+# Serena global configuration (managed by dotfiles -> ~/.serena/serena_config.yml).
+#
+# Purpose: run Serena as a read-only "semantic grep". Its semantic *read* tools
+# (find_symbol, get_symbols_overview, find_referencing_symbols, ...) give better
+# accuracy and token efficiency than plain grep when reading code. Its *write*
+# tools, however, are redundant with the host agent's own editing (Claude Code's
+# Edit/Write/Bash) and add round-trips, so we disable every write-capable tool.
+#
+# NOTE: the convenient `read_only: true` switch is a *project-level* setting
+# (.serena/project.yml) and is NOT available in this global file. To get the
+# same effect globally we enumerate every write-capable tool (everything marked
+# ToolMarkerCanEdit upstream) in `excluded_tools`. Keep this list in sync with
+# oraios/serena if tool names change.
+excluded_tools:
+  # Symbolic editing
+  - replace_symbol_body
+  - insert_after_symbol
+  - insert_before_symbol
+  - rename_symbol
+  - safe_delete_symbol
+  # Line / file editing
+  - create_text_file
+  - replace_content
+  - delete_lines
+  - replace_lines
+  - insert_at_line
+  # Shell execution
+  - execute_shell_command
+  # Memory writes (kept in parity with read_only mode; read_memory/list_memories
+  # stay enabled, so existing memories remain available)
+  - write_memory
+  - delete_memory
+  - rename_memory
+  - edit_memory
