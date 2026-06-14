@@ -15,29 +15,39 @@ skills=(
 )
 agents=(claude-code codex github-copilot)
 
-subcommand="${1:-install}"
+# agent ごとのユーザースコープ skills ディレクトリ
+skills_dir() {
+  case "$1" in
+    claude-code)    echo "$HOME/.claude/skills" ;;
+    codex)          echo "$HOME/.codex/skills" ;;
+    github-copilot) echo "$HOME/.copilot/skills" ;;
+    *) return 1 ;;
+  esac
+}
 
-case "$subcommand" in
-  install)
-    for skill in "${skills[@]}"
-    do
-      for agent in "${agents[@]}"
-      do
-        gh skill install $skill --agent "$agent" --scope user || exit $?
-      done
-    done
-    ;;
-  update)
-    # update は repo / --agent / --scope を取らず、スキル名のみを受け付ける
-    names=()
-    for skill in "${skills[@]}"
-    do
-      names+=("${skill#* }")
-    done
-    gh skill update "${names[@]}" || exit $?
-    ;;
-  *)
-    echo "Unknown subcommand: $subcommand" >&2
-    exit 1
-    ;;
-esac
+# upsert: 未インストールのものは install、インストール済みは最新へ update する。
+# update は tree SHA を比較するため、内容が同一なら自動でスキップされる
+# (= 最新の immutable release と同じなら何もしない)。
+
+# 1. 未インストールの (skill, agent) だけ install する
+for skill in "${skills[@]}"
+do
+  name="${skill#* }"
+  for agent in "${agents[@]}"
+  do
+    if [ -f "$(skills_dir "$agent")/$name/SKILL.md" ]
+    then
+      continue
+    fi
+    gh skill install $skill --agent "$agent" --scope user || exit $?
+  done
+done
+
+# 2. インストール済みは最新化する。--all で非対話、スキル名で対象を限定する。
+#    最新 (tree SHA 一致) なら update 側でスキップされる。
+names=()
+for skill in "${skills[@]}"
+do
+  names+=("${skill#* }")
+done
+gh skill update --all "${names[@]}" || exit $?
