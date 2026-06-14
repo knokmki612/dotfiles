@@ -6,6 +6,7 @@ fi
 
 skills=(
   "knokmki612/skills safety-deletion"
+  "knokmki612/skills serena-semantic-search"
   "microsoft/playwright-cli playwright-cli"
   "google/skills gcloud"
   "google/skills google-cloud-networking-observability"
