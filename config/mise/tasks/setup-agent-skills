@@ -12,7 +12,7 @@ skills=(
   "cloudflare/skills cloudflare"
   "cloudflare/skills wrangler"
 )
-agents=(claude-code codex copilot)
+agents=(claude-code codex github-copilot)
 
 subcommand="${1:-install}"
 
