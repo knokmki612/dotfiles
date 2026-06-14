@@ -56,7 +56,12 @@ export EDITOR="/usr/bin/env vim"
 
 export GIT_EDITOR="$EDITOR"
 
-export CLAUDE_CONFIG_DIR="$HOME/.claude"
+# Migrate legacy Claude Code config. Older setups exported CLAUDE_CONFIG_DIR=~/.claude,
+# which placed the main config at ~/.claude/.claude.json. We no longer set that var, so
+# Claude Code reads the default ~/.claude.json. Move it there once (idempotent);
+# mcpServers are re-populated by `rulesync generate` (mise run setup-agentic-ai).
+[[ -z "$CLAUDE_CONFIG_DIR" && -f "$HOME/.claude/.claude.json" ]] &&
+  command mv "$HOME/.claude/.claude.json" "$HOME/.claude.json"
 
 [[ -f "$HOME/.claude/settings.json" && -f "$HOME/.claude/settings.override.json" ]] &&
 command -v jq >/dev/null 2>&1 && {
