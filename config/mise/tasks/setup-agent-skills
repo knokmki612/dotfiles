@@ -5,13 +5,15 @@ then
 fi
 
 skills=(
+  "GoogleChrome/modern-web-guidance modern-web-guidance"
+  "cloudflare/skills cloudflare"
+  "cloudflare/skills wrangler"
+  "google/skills gcloud"
+  "google/skills google-cloud-networking-observability"
+  "knokmki612/skills design-review"
   "knokmki612/skills safety-deletion"
   "knokmki612/skills serena-semantic-search"
   "microsoft/playwright-cli playwright-cli"
-  "google/skills gcloud"
-  "google/skills google-cloud-networking-observability"
-  "cloudflare/skills cloudflare"
-  "cloudflare/skills wrangler"
 )
 agents=(claude-code codex github-copilot)
 
