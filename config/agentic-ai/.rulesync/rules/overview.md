@@ -9,6 +9,14 @@ globs: ["**/*"]
 - All dialogue with the user and all natural language outputs must be in Japanese.
 - Follow each project's own development rules (code style, development language, naming, etc.).
 
+## Skills
+
+- Before deleting files or directories by any means (`rm`, `find -delete`, etc.),
+  use the `safety-deletion` skill.
+- For symbol-level code search and navigation in a codebase, prefer the
+  `serena-semantic-search` skill over plain grep or whole-file reads (requires the
+  Serena MCP server).
+
 ## Design Principles
 
 Design principles (SOLID, DRY, patterns, etc.) are tools, not goals. Identify a concrete
