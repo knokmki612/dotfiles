@@ -10,13 +10,15 @@
   export TMPDIR="/tmp"
 }
 
-[[ ! "$PATH" =~ "$HOME/bin" ]] && {
-  PATH="$HOME/bin:$PATH"
-}
+case ":$PATH:" in
+  *":$HOME/bin:"*) ;;
+  *) PATH="$HOME/bin:$PATH" ;;
+esac
 
-[[ ! "$PATH" =~ "$HOME/.local/bin" ]] && {
-  PATH="$HOME/.local/bin:$PATH"
-}
+case ":$PATH:" in
+  *":$HOME/.local/bin:"*) ;;
+  *) PATH="$HOME/.local/bin:$PATH" ;;
+esac
 
 [[ -d "/usr/games/bin" ]] && {
   PATH="/usr/games/bin:$PATH"
@@ -70,7 +72,12 @@ command -v jq >/dev/null 2>&1 && {
     "$HOME/.claude/settings.override.json" \
     > "$HOME/.claude/settings.json.tmp"
 
-  command mv "$HOME/.claude/settings.json.tmp" "$HOME/.claude/settings.json"
+  if cmp -s "$HOME/.claude/settings.json" "$HOME/.claude/settings.json.tmp"
+  then
+    command rm "$HOME/.claude/settings.json.tmp"
+  else
+    command mv "$HOME/.claude/settings.json.tmp" "$HOME/.claude/settings.json"
+  fi
 }
 
 [[ -f "$HOME/.bashrc_override" ]] && {
