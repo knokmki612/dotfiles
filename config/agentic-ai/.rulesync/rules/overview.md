@@ -24,7 +24,8 @@ problem first (e.g., a change forces edits across multiple files, tests need dep
 unrelated to what they verify), then apply a principle only when it beats the simpler
 alternatives (inlining, a helper function, deletion). When in doubt, choose the simpler
 option. Do not add abstractions, layers, or interfaces for speculative future
-requirements (YAGNI).
+requirements (YAGNI). For a structured evaluation of a specific design or refactoring
+decision, use the `design-review` skill — the procedural form of this section.
 
 ## Comments
 
