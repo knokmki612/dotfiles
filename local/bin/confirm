@@ -7,7 +7,7 @@ echo "$command $@"
 echo "are you sure you want to process these args by ${command} command?"
 
 while true; do
-  echo -n "(y/n): "
+  printf '(y/n): '
   read response
   if echo "$response" | grep -sq '^[yn]$'
   then
