@@ -1,65 +1,51 @@
 ---
 root: true
-targets: ["*"]
 description: "Project overview and general development guidelines"
 globs: ["**/*"]
 ---
 
-# Project Overview
-
-## General Guidelines
+# General Guidelines
 
 - All dialogue with the user and all natural language outputs must be in Japanese.
-- Follow the development rules (including code style, development language, etc.) of each project
-- Follow consistent naming conventions
-- Write self-documenting code with clear variable and function names
+- Follow each project's own development rules (code style, development language, naming, etc.).
+
+## Skills
+
+- Before deleting files or directories by any means (`rm`, `find -delete`, etc.),
+  use the `safety-deletion` skill.
+- For symbol-level code search and navigation in a codebase, prefer the
+  `serena-semantic-search` skill over plain grep or whole-file reads (requires the
+  Serena MCP server).
 
 ## Design Principles
 
-- Design principles (SOLID, DRY, patterns, etc.) are tools, not goals. Identify a
-  concrete problem first (e.g., a change forces edits across multiple files, tests need
-  dependencies unrelated to what they verify), then apply a principle only when it beats
-  the simpler alternatives (inlining, a helper function, deletion). When in doubt, choose
-  the simpler option.
-- Do not add abstractions, layers, or interfaces for speculative future requirements (YAGNI).
+Design principles (SOLID, DRY, patterns, etc.) are tools, not goals. Identify a concrete
+problem first (e.g., a change forces edits across multiple files, tests need dependencies
+unrelated to what they verify), then apply a principle only when it beats the simpler
+alternatives (inlining, a helper function, deletion). When in doubt, choose the simpler
+option. Do not add abstractions, layers, or interfaces for speculative future
+requirements (YAGNI). For a structured evaluation of a specific design or refactoring
+decision, use the `design-review` skill — the procedural form of this section.
 
 ## Comments
 
-Judge a comment by the trade-off between "the reader's effort saved at that spot" and
-"noise + drift cost". Do not judge by the what/why dichotomy. Use the three layers below.
+Judge a comment by "reader's effort saved at that spot" vs "noise + drift cost" — not by
+the what/why dichotomy. Three layers:
 
-### 1. Guard comments — always keep
+1. **Guard — always keep.** A point that would puzzle someone reading the implementation,
+   or a DO-NOT / pitfall. Keep a rationale only when it is specific to this spot, cannot
+   be read off types, signatures, error messages, nearby code, or language semantics, and
+   removing it would invite a breaking "improvement". Keep these minimal, with a `NOTE:`
+   prefix, so the reasoning stays traceable.
+2. **Convention why — once.** Write codebase-wide conventions once, at the enforcement
+   point (root/main, or the relevant function). A leaf-level echo is a drift source and
+   is forbidden.
+3. **Single-line what — writer's discretion.** A heading line for a following non-trivial
+   multi-line block is fine; a one-line paraphrase of a single self-named call is not
+   required.
 
-A point that would puzzle someone reading the implementation, or a DO-NOT / pitfall to see
-when referencing it. Keep a rationale only when it satisfies **all** of:
-
-- Locality: the reason is specific to this spot (not a codebase-wide convention).
-- Non-recoverability: it cannot be read off types, signatures, error messages, or nearby code.
-- Guard nature: removing or changing it breaks something (i.e., it stops a future "improvement").
-- Not language-spec-obvious: not the likes of "a log appears where it is written".
-
-Keep "looks wrong but is correct" and "DO NOT X" cases minimal with a `NOTE:` prefix so the
-reasoning stays traceable.
-
-### 2. Convention why — once, at the definition/enforcement point
-
-Codebase-wide conventions (e.g., errors are rethrown at the leaf with context added to `cause`,
-and logged once in `main`) are not written at every application site. Write them once at the
-convention's enforcement point (root/main, or the relevant function). A leaf-level echo is a
-drift source — a convention change would force edits at every copy — and is forbidden.
-
-### 3. Single-line what — writer's discretion
-
-A single-line comment that serves as a heading for a following non-trivial multi-line block is
-fine (it aids top-to-bottom reading). A one-line paraphrase of a single self-named call has
-little value and is not required.
-
-### Do not keep provenance in code
-
-Design provenance ("who decided what, when, and why") belongs in ADR / PR / commit messages.
-History written in code rots. The only exception is the Guard case above (questions or DO-NOTs
-surfaced while reading the implementation); only then keep the essence of the provenance
-minimally with a `NOTE:` prefix.
+Design provenance (who decided what, when, and why) belongs in ADR / PR / commit
+messages, not in code — except when it doubles as a Guard comment (layer 1).
 
 ## Dependency Injection
 
