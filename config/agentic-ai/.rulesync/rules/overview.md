@@ -11,8 +11,8 @@ globs: ["**/*"]
 
 ## Skills
 
-Default choices, not absolute rules — but never skip one silently: a deviation must
-state its reason.
+Never skip one of these silently — deviating from a rule below requires stating the
+reason. Each rule carries its own strength and deviation condition.
 
 - File/directory deletion: in a git working tree, always use the `safety-deletion`
   skill (`git rm` / `git clean`) instead of `rm`, `find -delete`, etc. The only
