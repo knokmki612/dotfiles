@@ -50,5 +50,18 @@
       "mcp__serena__get_diagnostics_for_symbol",
       "mcp__serena__get_symbols_overview"
     ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/deny-raw-deletion.sh"
+          }
+        ]
+      }
+    ]
   }
 }
