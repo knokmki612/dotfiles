@@ -1,0 +1,33 @@
+#!/bin/bash
+# Report which tools and skills Claude Code invoked in recent sessions.
+# Usage: mise run agent-usage-report [days]   (default 7)
+# Window is file-mtime granularity: a session active within the window is
+# included whole, even if it started earlier.
+set -euo pipefail
+
+days="${1:-7}"
+projects="$HOME/.claude/projects"
+
+[ -d "$projects" ] || { echo "no transcripts under $projects"; exit 0; }
+
+# Count tool_use blocks only. A plain grep over the transcript JSONL
+# over-counts: per-session tool definitions and prompt text also contain tool
+# names, which shows up as a near-uniform floor across every tool of a server.
+usage="$(
+  find "$projects" -name '*.jsonl' -newermt "$days days ago" -exec cat {} + |
+    jq -Rr '
+      fromjson?
+      | .message.content[]?
+      | select(.type? == "tool_use")
+      | if .name == "Skill" then "skill\t" + (.input.skill? // "?")
+        else "tool\t" + .name end
+    '
+)"
+
+echo "# Tool/skill usage in sessions active in the last $days day(s)"
+echo
+echo "## Skills"
+awk -F'\t' '$1 == "skill" { print $2 }' <<<"$usage" | sort | uniq -c | sort -rn
+echo
+echo "## Tools"
+awk -F'\t' '$1 == "tool" { print $2 }' <<<"$usage" | sort | uniq -c | sort -rn

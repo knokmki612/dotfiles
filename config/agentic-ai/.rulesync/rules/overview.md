@@ -11,11 +11,17 @@ globs: ["**/*"]
 
 ## Skills
 
-- Before deleting files or directories by any means (`rm`, `find -delete`, etc.),
-  use the `safety-deletion` skill.
-- For symbol-level code search and navigation in a codebase, prefer the
-  `serena-semantic-search` skill over plain grep or whole-file reads (requires the
-  Serena MCP server).
+Never skip one of these silently — deviating from a rule below requires stating the
+reason. Each rule carries its own strength and deviation condition.
+
+- File/directory deletion: in a git working tree, always use the `safety-deletion`
+  skill (`git rm` / `git clean`) instead of `rm`, `find -delete`, etc. The only
+  legitimate deviation is a target outside git control.
+- Symbol-level search across files (definitions, references, call sites): default to
+  the `serena-semantic-search` skill (requires the Serena MCP server). Plain grep,
+  line-range reads, and literal-text search are fine without it.
+- Design or refactoring judgment at a scale where opinions can diverge: use the
+  `design-review` skill. Trivial fixes do not need it.
 
 ## Design Principles
 
@@ -24,8 +30,7 @@ problem first (e.g., a change forces edits across multiple files, tests need dep
 unrelated to what they verify), then apply a principle only when it beats the simpler
 alternatives (inlining, a helper function, deletion). When in doubt, choose the simpler
 option. Do not add abstractions, layers, or interfaces for speculative future
-requirements (YAGNI). For a structured evaluation of a specific design or refactoring
-decision, use the `design-review` skill — the procedural form of this section.
+requirements (YAGNI). The `design-review` skill is the procedural form of this section.
 
 ## Comments
 
