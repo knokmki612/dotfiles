@@ -1,10 +1,9 @@
 {
-  "$schema": "https://raw.githubusercontent.com/dyoshikawa/rulesync/refs/heads/main/config-schema.json",
+  "$schema": "https://github.com/dyoshikawa/rulesync/releases/latest/download/config-schema.json",
   "targets": ["copilot", "claudecode", "codexcli"],
-  "features": ["rules", "ignore", "mcp", "commands", "subagents", "skills"],
-  "baseDirs": ["."],
+  "features": ["rules", "ignore", "mcp", "commands", "subagents"],
+  "outputRoots": ["."],
   "delete": true,
   "verbose": true,
   "global": true,
-  "modularMcp": true,
 }

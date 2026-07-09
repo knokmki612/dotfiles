@@ -1,0 +1,68 @@
+#!/bin/bash
+if ! which gh
+then
+  mise install
+fi
+
+skills=(
+  "GoogleChrome/modern-web-guidance modern-web-guidance"
+  "cloudflare/skills cloudflare"
+  "cloudflare/skills wrangler"
+  "google/skills gcloud"
+  "google/skills google-cloud-networking-observability"
+  "knokmki612/skills design-review"
+  "knokmki612/skills safety-deletion"
+  "knokmki612/skills serena-semantic-search"
+  "knokmki612/skills wip-commit-organization"
+  "microsoft/playwright-cli playwright-cli"
+)
+agents=(claude-code codex github-copilot)
+
+# agent ごとのユーザースコープ skills ディレクトリ
+skills_dir() {
+  case "$1" in
+    claude-code)    echo "$HOME/.claude/skills" ;;
+    codex)          echo "$HOME/.codex/skills" ;;
+    github-copilot) echo "$HOME/.copilot/skills" ;;
+    *) return 1 ;;
+  esac
+}
+
+# upsert: 未インストールのものは install、インストール済みは最新へ update する。
+# update は tree SHA を比較するため、内容が同一なら自動でスキップされる
+# (= 最新の immutable release と同じなら何もしない)。
+
+# frontmatter に gh skill の追跡メタデータがあるか
+has_tracking_metadata() {
+  grep -q 'github-repo:' "$1" 2>/dev/null
+}
+
+# 1. install / reinstall
+#    - 未インストール          → install
+#    - 追跡メタデータ欠落       → 強制再インストール (古い gh skill 由来。
+#                                メタデータを注入し以後 update 可能にする)
+#    - メタデータ有り           → 後段の update に任せる
+for skill in "${skills[@]}"
+do
+  name="${skill#* }"
+  for agent in "${agents[@]}"
+  do
+    skill_md="$(skills_dir "$agent")/$name/SKILL.md"
+    if [ ! -f "$skill_md" ]
+    then
+      gh skill install $skill --agent "$agent" --scope user || exit $?
+    elif ! has_tracking_metadata "$skill_md"
+    then
+      gh skill install $skill --agent "$agent" --scope user --force || exit $?
+    fi
+  done
+done
+
+# 2. インストール済みは最新化する。--all で非対話、スキル名で対象を限定する。
+#    最新 (tree SHA 一致) なら update 側でスキップされる。
+names=()
+for skill in "${skills[@]}"
+do
+  names+=("${skill#* }")
+done
+gh skill update --all "${names[@]}" || exit $?

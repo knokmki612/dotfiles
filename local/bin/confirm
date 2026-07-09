@@ -7,8 +7,14 @@ echo "$command $@"
 echo "are you sure you want to process these args by ${command} command?"
 
 while true; do
-  echo -n "(y/n): "
-  read response
+  printf '(y/n): '
+  response=$(timeout 10 sh -c 'IFS= read -r response && printf %s "$response"')
+  if [ $? -ne 0 ]
+  then
+    echo
+    echo "execution was blocked because human interaction is required"
+    exit 1
+  fi
   if echo "$response" | grep -sq '^[yn]$'
   then
     break

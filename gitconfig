@@ -4,7 +4,6 @@
 	signingkey = FA5BD6734F11AB77
 [core]
 	autocrlf = input
-	excludesfile = /home/kimiaki/.gitignore.global
 [sendemail]
 	smtpencryption = tls
 	smtpserver = smtp.gmail.com

@@ -10,13 +10,15 @@
   export TMPDIR="/tmp"
 }
 
-[[ ! "$PATH" =~ "$HOME/bin" ]] && {
-  PATH="$HOME/bin:$PATH"
-}
+case ":$PATH:" in
+  *":$HOME/bin:"*) ;;
+  *) PATH="$HOME/bin:$PATH" ;;
+esac
 
-[[ ! "$PATH" =~ "$HOME/.local/bin" ]] && {
-  PATH="$HOME/.local/bin:$PATH"
-}
+case ":$PATH:" in
+  *":$HOME/.local/bin:"*) ;;
+  *) PATH="$HOME/.local/bin:$PATH" ;;
+esac
 
 [[ -d "/usr/games/bin" ]] && {
   PATH="/usr/games/bin:$PATH"
@@ -33,6 +35,17 @@ alias cp="confirm cp"
 alias mv="confirm mv"
 alias sfossdk="/srv/mer/sdks/sfossdk/mer-sdk-chroot"
 
+command -v toolbox >/dev/null 2>&1 && {
+  latest_ubuntu_toolbox="$(toolbox list --containers 2>/dev/null \
+    | awk '$2 ~ /^ubuntu-toolbox-/ {print $2}' \
+    | sort -V \
+    | tail -n 1)"
+  [[ -n "$latest_ubuntu_toolbox" ]] && {
+    alias playwright-cli="toolbox run -c $latest_ubuntu_toolbox playwright-cli"
+  }
+  unset latest_ubuntu_toolbox
+}
+
 export HISTSIZE=100000
 export HISTTIMEFORMAT="%Y/%m/%d %H:%M:%S "
 
@@ -45,7 +58,12 @@ export EDITOR="/usr/bin/env vim"
 
 export GIT_EDITOR="$EDITOR"
 
-export CLAUDE_CONFIG_DIR="$HOME/.claude"
+# Migrate legacy Claude Code config. Older setups exported CLAUDE_CONFIG_DIR=~/.claude,
+# which placed the main config at ~/.claude/.claude.json. We no longer set that var, so
+# Claude Code reads the default ~/.claude.json. Move it there once (idempotent);
+# mcpServers are re-populated by `rulesync generate` (mise run setup-agentic-ai).
+[[ -z "$CLAUDE_CONFIG_DIR" && -f "$HOME/.claude/.claude.json" ]] &&
+  command mv "$HOME/.claude/.claude.json" "$HOME/.claude.json"
 
 [[ -f "$HOME/.claude/settings.json" && -f "$HOME/.claude/settings.override.json" ]] &&
 command -v jq >/dev/null 2>&1 && {
@@ -54,7 +72,12 @@ command -v jq >/dev/null 2>&1 && {
     "$HOME/.claude/settings.override.json" \
     > "$HOME/.claude/settings.json.tmp"
 
-  command mv "$HOME/.claude/settings.json.tmp" "$HOME/.claude/settings.json"
+  if cmp -s "$HOME/.claude/settings.json" "$HOME/.claude/settings.json.tmp"
+  then
+    command rm "$HOME/.claude/settings.json.tmp"
+  else
+    command mv "$HOME/.claude/settings.json.tmp" "$HOME/.claude/settings.json"
+  fi
 }
 
 [[ -f "$HOME/.bashrc_override" ]] && {
@@ -68,7 +91,7 @@ command -v jq >/dev/null 2>&1 && {
 # pnpm
 export PNPM_HOME="$HOME/.local/share/pnpm"
 case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
+  *":$PNPM_HOME/bin:"*) ;;
+  *) export PATH="$PNPM_HOME/bin:$PATH" ;;
 esac
 # pnpm end
