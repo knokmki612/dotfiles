@@ -48,7 +48,13 @@
       "mcp__serena__find_symbol",
       "mcp__serena__get_diagnostics_for_file",
       "mcp__serena__get_diagnostics_for_symbol",
-      "mcp__serena__get_symbols_overview"
+      "mcp__serena__get_symbols_overview",
+      "pnpm build *",
+      "pnpm clean *",
+      "pnpm format *",
+      "pnpm lint *",
+      "pnpm test *",
+      "pnpm type-check *"
     ]
   },
   "hooks": {
