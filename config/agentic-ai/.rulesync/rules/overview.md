@@ -30,6 +30,15 @@ reason. Each rule carries its own strength and deviation condition.
 - Design or refactoring judgment at a scale where opinions can diverge: use the
   `design-review` skill. Trivial fixes do not need it.
 
+## Before Committing
+
+Before every commit, check the project's task manifest (`package.json` scripts,
+`Makefile`, `justfile`, `deno.json` tasks, etc.) and run the tasks that correspond to
+formatting/linting and testing. Report the results; do not commit with failing checks
+unless the failure pre-exists the change and is unrelated (say so explicitly).
+Deviation condition: when the full test suite is too heavy, run only the tests
+relevant to the change and state that you narrowed the scope.
+
 ## Design Principles
 
 Design principles (SOLID, DRY, patterns, etc.) are tools, not goals. Identify a concrete
