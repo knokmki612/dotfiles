@@ -15,8 +15,10 @@ Never skip one of these silently — deviating from a rule below requires statin
 reason. Each rule carries its own strength and deviation condition.
 
 - File/directory deletion: in a git working tree, always use the `safety-deletion`
-  skill (`git rm` / `git clean`) instead of `rm`, `find -delete`, etc. The only
-  legitimate deviation is a target outside git control.
+  skill (`git rm` for tracked paths, `git clean` for untracked/ignored ones)
+  instead of `rm`, `find -delete`, etc. Untracked is not an exemption. Avoid
+  needing deletion at all: create scratch/temp files under `$TMPDIR`
+  (`mktemp -d`), not the working tree; files there need no cleanup.
 - Symbol-level search across files (definitions, references, call sites): default to
   the `serena-semantic-search` skill (requires the Serena MCP server). Plain grep,
   line-range reads, and literal-text search are fine without it.

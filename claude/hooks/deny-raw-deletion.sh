@@ -24,7 +24,7 @@ if echo "$cmd" | grep -qE "${pos}${pre}${path}(rm|rmdir|shred|unlink)([[:space:]
    echo "$cmd" | grep -qE "${pos}${pre}${path}truncate[[:space:]]" ||
    echo "$cmd" | grep -qE "${pos}${pre}${path}find[[:space:]][^;&|]*(-delete|-exec[[:space:]]+([^[:space:]]*/)?rm[[:space:]])"
 then
-  echo "Raw deletion command blocked by ~/.claude/hooks/deny-raw-deletion.sh: use the safety-deletion skill (git rm / git clean) so the removal stays recoverable. If the target is outside git control, state the reason and ask the user before deleting." >&2
+  echo "Raw deletion command blocked by ~/.claude/hooks/deny-raw-deletion.sh: use the safety-deletion skill — git rm for tracked paths, git clean for untracked/ignored ones — so the removal stays recoverable. Untracked is not an exemption. Next time, create scratch/temp files under \$TMPDIR (mktemp -d) instead of the working tree; files there need no cleanup." >&2
   exit 2
 fi
 
