@@ -19,9 +19,14 @@ reason. Each rule carries its own strength and deviation condition.
   instead of `rm`, `find -delete`, etc. Untracked is not an exemption. Avoid
   needing deletion at all: create scratch/temp files under `$TMPDIR`
   (`mktemp -d`), not the working tree; files there need no cleanup.
-- Symbol-level search across files (definitions, references, call sites): default to
-  the `serena-semantic-search` skill (requires the Serena MCP server). Plain grep,
-  line-range reads, and literal-text search are fine without it.
+- Before grepping an identifier (a function/class/method/variable name) to find
+  where it is defined, referenced, implemented, or called — or before reading a
+  whole source file just to understand its structure: that intent is symbol-level
+  search, even if it feels like an ordinary grep. Use the `serena-semantic-search`
+  skill (requires the Serena MCP server) instead. When starting to read an
+  implementation file, lead with a symbol overview rather than a full-file read.
+  Literal-text search (strings, error messages, config keys), line-range reads,
+  and non-code files stay on plain grep/Read.
 - Design or refactoring judgment at a scale where opinions can diverge: use the
   `design-review` skill. Trivial fixes do not need it.
 
