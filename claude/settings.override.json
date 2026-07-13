@@ -42,19 +42,19 @@
       "Bash(playwright-cli snapshot*)",
       "Bash(playwright-cli type *)",
       "Bash(playwright-cli uncheck *)",
+      "Bash(pnpm build *)",
+      "Bash(pnpm clean *)",
+      "Bash(pnpm format *)",
+      "Bash(pnpm lint *)",
+      "Bash(pnpm test *)",
+      "Bash(pnpm type-check *)",
       "mcp__serena__find_declaration",
       "mcp__serena__find_implementations",
       "mcp__serena__find_referencing_symbols",
       "mcp__serena__find_symbol",
       "mcp__serena__get_diagnostics_for_file",
       "mcp__serena__get_diagnostics_for_symbol",
-      "mcp__serena__get_symbols_overview",
-      "pnpm build *",
-      "pnpm clean *",
-      "pnpm format *",
-      "pnpm lint *",
-      "pnpm test *",
-      "pnpm type-check *"
+      "mcp__serena__get_symbols_overview"
     ]
   },
   "hooks": {
