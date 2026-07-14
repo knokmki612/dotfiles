@@ -18,13 +18,6 @@
         "."
       ],
       "env": {}
-    },
-    "context7": {
-      "description": "Retrieves up-to-date documentation and code examples for libraries and frameworks. Used for looking up API references, usage patterns, and best practices. Needed when working with external libraries, learning new APIs, or verifying current library behavior and syntax.",
-      "type": "stdio",
-      "command": "npx",
-      "args": ["-y", "@upstash/context7-mcp"],
-      "env": {}
     }
   }
 }
