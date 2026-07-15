@@ -35,12 +35,13 @@ in `~/.dotfileignore`.
    mise install
    ```
 
-3. Generate AI agent configs (rules, MCP servers, subagents) and install
-   agent skills:
+3. Generate AI agent configs (rules, MCP servers, subagents), install
+   agent skills, and install Claude Code plugins:
 
    ```sh
    mise run setup-agentic-ai
    mise run setup-agent-skills
+   mise run setup-claude-plugins
    ```
 
 ## Layout

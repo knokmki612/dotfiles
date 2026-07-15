@@ -1,0 +1,52 @@
+#!/bin/bash
+set -euo pipefail
+
+if ! command -v claude >/dev/null 2>&1
+then
+  mise install
+fi
+
+# Marketplaces to register (<name> <owner/repo>). claude-plugins-official is
+# auto-registered by Claude Code on interactive first launch, but a non-
+# interactive bootstrap (this task, CI) must add it explicitly per docs.
+marketplaces=(
+  "claude-plugins-official anthropics/claude-plugins-official"
+  "anthropic-agent-skills anthropics/skills"
+)
+
+# Plugins to install as <plugin>@<marketplace>. `claude plugin install` writes
+# enabledPlugins to ~/.claude/settings.json itself, so no override side is
+# needed. Updates ride Claude Code's built-in autoUpdate.
+plugins=(
+  "example-skills@anthropic-agent-skills"
+  "typescript-lsp@claude-plugins-official"
+)
+
+known="$HOME/.claude/plugins/known_marketplaces.json"
+installed="$HOME/.claude/plugins/installed_plugins.json"
+
+marketplace_registered() {
+  [ -f "$known" ] && jq -e --arg n "$1" 'has($n)' "$known" >/dev/null 2>&1
+}
+
+plugin_installed() {
+  [ -f "$installed" ] && jq -e --arg id "$1" '.plugins | has($id)' "$installed" >/dev/null 2>&1
+}
+
+for m in "${marketplaces[@]}"
+do
+  name="${m% *}"
+  repo="${m#* }"
+  if ! marketplace_registered "$name"
+  then
+    claude plugin marketplace add "$repo"
+  fi
+done
+
+for p in "${plugins[@]}"
+do
+  if ! plugin_installed "$p"
+  then
+    claude plugin install "$p" --scope user
+  fi
+done
