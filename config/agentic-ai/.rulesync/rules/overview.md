@@ -29,6 +29,11 @@ reason. Each rule carries its own strength and deviation condition.
   and non-code files stay on plain grep/Read.
 - Design or refactoring judgment at a scale where opinions can diverge: use the
   `design-review` skill. Trivial fixes do not need it.
+- After a multi-iteration change settles — before opening or finalizing a PR —
+  or whenever a touched file's comments narrate development history ("since
+  #NNN", "previously", "per review"), use the `comment-pruning` skill to
+  re-judge accumulated comments against the Comments policy below. Do not run
+  it mid-implementation; pruning while the code is still moving causes churn.
 
 ## Before Committing
 
@@ -66,7 +71,9 @@ the what/why dichotomy. Three layers:
    required.
 
 Design provenance (who decided what, when, and why) belongs in ADR / PR / commit
-messages, not in code — except when it doubles as a Guard comment (layer 1).
+messages, not in code — except when it doubles as a Guard comment (layer 1). The
+`comment-pruning` skill is the procedural form of this section — it re-applies
+these layers to comments that have already accumulated.
 
 ## Dependency Injection
 
