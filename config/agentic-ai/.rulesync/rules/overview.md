@@ -29,6 +29,11 @@ reason. Each rule carries its own strength and deviation condition.
   and non-code files stay on plain grep/Read.
 - Design or refactoring judgment at a scale where opinions can diverge: use the
   `design-review` skill. Trivial fixes do not need it.
+- After a multi-iteration change settles — before opening or finalizing a PR —
+  or whenever a touched file's comments narrate development history ("since
+  #NNN", "previously", "per review"), use the `comment-pruning` skill to
+  re-judge accumulated comments against the Comments policy below. Do not run
+  it mid-implementation; pruning while the code is still moving causes churn.
 
 ## Before Committing
 
@@ -53,20 +58,18 @@ requirements (YAGNI). The `design-review` skill is the procedural form of this s
 Judge a comment by "reader's effort saved at that spot" vs "noise + drift cost" — not by
 the what/why dichotomy. Three layers:
 
-1. **Guard — always keep.** A point that would puzzle someone reading the implementation,
-   or a DO-NOT / pitfall. Keep a rationale only when it is specific to this spot, cannot
-   be read off types, signatures, error messages, nearby code, or language semantics, and
-   removing it would invite a breaking "improvement". Keep these minimal, with a `NOTE:`
-   prefix, so the reasoning stays traceable.
-2. **Convention why — once.** Write codebase-wide conventions once, at the enforcement
-   point (root/main, or the relevant function). A leaf-level echo is a drift source and
-   is forbidden.
-3. **Single-line what — writer's discretion.** A heading line for a following non-trivial
-   multi-line block is fine; a one-line paraphrase of a single self-named call is not
-   required.
+1. **Guard — always keep.** A DO-NOT / pitfall, or a rationale unreadable from the code
+   itself; keep it minimal, with a `NOTE:` prefix.
+2. **Convention why — once.** Stated only at the enforcement point; a leaf-level echo is
+   a drift source and is forbidden.
+3. **Single-line what — writer's discretion.** A heading over a non-trivial block is
+   fine; a paraphrase of a self-named call is not required.
 
 Design provenance (who decided what, when, and why) belongs in ADR / PR / commit
-messages, not in code — except when it doubles as a Guard comment (layer 1).
+messages, not in code — except when it doubles as a Guard comment (layer 1). The
+`comment-pruning` skill is the procedural form of this section; its
+`references/classification.md` is the canonical detailed rubric (criteria, signals,
+worked examples).
 
 ## Dependency Injection
 
