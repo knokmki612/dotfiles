@@ -10,6 +10,7 @@ skills=(
   "cloudflare/skills wrangler"
   "google/skills gcloud"
   "google/skills google-cloud-networking-observability"
+  "knokmki612/skills comment-pruning"
   "knokmki612/skills design-review"
   "knokmki612/skills safety-deletion"
   "knokmki612/skills serena-semantic-search"
