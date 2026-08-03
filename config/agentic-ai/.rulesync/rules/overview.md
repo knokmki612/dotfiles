@@ -30,10 +30,11 @@ reason. Each rule carries its own strength and deviation condition.
 - Design or refactoring judgment at a scale where opinions can diverge: use the
   `design-review` skill. Trivial fixes do not need it.
 - After a multi-iteration change settles — before opening or finalizing a PR —
-  or whenever a touched file's comments narrate development history ("since
-  #NNN", "previously", "per review"), use the `comment-pruning` skill to
-  re-judge accumulated comments against the Comments policy below. Do not run
-  it mid-implementation; pruning while the code is still moving causes churn.
+  or whenever a touched file's annotations narrate development history, point
+  at code that has moved, or pack more facts per block than a reader can hold,
+  use the `comment-pruning` skill to re-judge them against the Comments policy
+  below. Do not run it mid-implementation; pruning while the code is still
+  moving causes churn.
 
 ## Before Committing
 
