@@ -35,6 +35,10 @@ reason. Each rule carries its own strength and deviation condition.
   use the `comment-pruning` skill to re-judge them against the Comments policy
   below. Do not run it mid-implementation; pruning while the code is still
   moving causes churn.
+- When documentation *structure* has failed — a heading tree that no longer
+  predicts content, or one section mixing concepts, invariants, and
+  procedures — use the `docs-restructuring` skill first, then `comment-pruning`
+  for per-unit tightening. Routine tidying needs only the latter.
 
 ## Before Committing
 
