@@ -20,3 +20,4 @@
 	gpgsign = true
 [alias]
 	cs = commit --signoff
+	reonto = "!f() { git rebase --onto \"${2:-origin/main}\" \"$1\"; }; f"
