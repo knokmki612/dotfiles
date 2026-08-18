@@ -9,10 +9,6 @@ mkdir -p "${NVIM_DIR}" "${NVIM_DIR}/colors"
   ln -sf "${VIM_DIR}/vimrc" "${NVIM_DIR}/init.vim"
 }
 
-[ -d "${VIM_DIR}/ftplugin" ] && {
-  ln -sf "${VIM_DIR}/ftplugin" "${NVIM_DIR}/"
-}
-
 [ -d "${VIM_DIR}/ftdetect" ] && {
   ln -sf "${VIM_DIR}/ftdetect" "${NVIM_DIR}/"
 }
