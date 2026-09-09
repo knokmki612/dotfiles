@@ -49,9 +49,9 @@ in `~/.dotfileignore`.
 - `bashrc`, `profile`, `xprofile` — shell and X session setup
 - `config/` — XDG configs (`~/.config/…`): mise, bspwm, sxhkd, and
   `agentic-ai` (the rulesync source for Claude Code / Codex / Copilot)
-- `claude/settings.override.json` — repo-managed Claude Code permissions and
-  hooks, merged into `~/.claude/settings.json` by bashrc; hook scripts live in
-  `claude/hooks/`
+- `claude/settings.override.json` — repo-managed Claude Code permissions, auto mode
+  classifier rules, and hooks, merged into `~/.claude/settings.json` by bashrc;
+  hook scripts live in `claude/hooks/`
 - `local/bin/` — small utility scripts (`~/.local/bin/…`)
 - `var/app/` — Flatpak app configs (VS Code)
 
