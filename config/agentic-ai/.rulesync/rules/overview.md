@@ -8,6 +8,10 @@ globs: ["**/*"]
 
 - All dialogue with the user and all natural language outputs must be in Japanese.
 - Follow each project's own development rules (code style, development language, naming, etc.).
+- Keep what was checked against the code (say where) and what merely sounds
+  right in distinct voices. Before asserting how something should be done, look
+  at how the surrounding code already does it; an existing helper or convention
+  outranks a solution written from scratch.
 
 ## Skills
 
@@ -52,7 +56,10 @@ problem first (e.g., a change forces edits across multiple files, tests need dep
 unrelated to what they verify), then apply a principle only when it beats the simpler
 alternatives (inlining, a helper function, deletion). When in doubt, choose the simpler
 option. Do not add abstractions, layers, or interfaces for speculative future
-requirements (YAGNI). The `design-review` skill is the procedural form of this section.
+requirements (YAGNI). Refactoring preserves behavior, including behavior with no
+reason to exist: a shape the plan keeps needs evidence it is live, and whether a rule
+*should* exist is a question for the user, not something the code can answer. The
+`design-review` skill is the procedural form of this section.
 
 ## Comments
 
