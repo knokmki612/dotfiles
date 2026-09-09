@@ -2,9 +2,7 @@
   "permissions": {
     "allow": [
       "Bash(gh api -X GET *)",
-      "Bash(gh api -X PATCH *)",
       "Bash(gh api -X POST *)",
-      "Bash(gh api -X PUT *)",
       "Bash(gh issue list *)",
       "Bash(gh issue view *)",
       "Bash(gh pr checks *)",
@@ -55,6 +53,27 @@
       "mcp__serena__get_diagnostics_for_file",
       "mcp__serena__get_diagnostics_for_symbol",
       "mcp__serena__get_symbols_overview"
+    ],
+    "ask": [
+      "Bash(gh api -X DELETE *)",
+      "Bash(gh api -X PATCH *)",
+      "Bash(gh api -X PUT *)",
+      "Bash(gh * delete *)",
+      "Bash(wrangler delete *)",
+      "Bash(wrangler * delete *)",
+      "Bash(gcloud * delete *)"
+    ]
+  },
+  "autoMode": {
+    "environment": [
+      "$defaults",
+      "Cloud provider(s): Cloudflare (Workers, Workers Builds, Pages, KV, D1, R2, DNS) driven through wrangler and the Cloudflare REST API; Google Cloud driven through gcloud",
+      "Sensitive remote targets: every Cloudflare account, zone, Worker, Pages project, and Workers Builds configuration, and every Google Cloud project, whatever its name. None of them is a staging or throwaway environment unless the user names it as one in the conversation",
+      "Protected IaC scopes: wrangler configuration (wrangler.toml / wrangler.json / wrangler.jsonc) and every Cloudflare resource it manages"
+    ],
+    "soft_deny": [
+      "$defaults",
+      "Remote Deletion [named+specifics — must name: the resource and the destructive operation]: an HTTP DELETE, or a delete/destroy/purge/remove subcommand of a cloud or SaaS CLI (wrangler, gh, gcloud, terraform), aimed at a resource that existed before the session. Measuring or verifying API behavior never clears this: measurement must be read-only (GET, list, describe, --dry-run). Clears only when the user names the exact resource and the destructive operation."
     ]
   },
   "hooks": {
@@ -65,6 +84,10 @@
           {
             "type": "command",
             "command": "~/.claude/hooks/deny-raw-deletion.sh"
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/deny-remote-deletion.sh"
           }
         ]
       }

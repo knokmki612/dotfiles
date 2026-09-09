@@ -36,6 +36,30 @@ reason. Each rule carries its own strength and deviation condition.
   below. Do not run it mid-implementation; pruning while the code is still
   moving causes churn.
 
+## Verification and Remote Resources
+
+Verifying against the real system is welcome — it raises accuracy — but a
+measurement must never change what it measures.
+
+- Verify with side-effect-free operations only: GET / list / describe / read,
+  `--dry-run`, `--help`, and the documentation. Never probe an API by issuing a
+  mutating request "to see what happens": a DELETE against a live resource is
+  an experiment on production, not a measurement.
+- Every piece of state outside the git working tree — a remote API, a cloud
+  resource (Cloudflare, Google Cloud, GitHub), a database, a SaaS setting — is
+  a remote resource. Before mutating or deleting one, establish how it would be
+  restored (backup, versioned config, re-creatable from source in this repo).
+  Restorability that has not been confirmed counts as none: stop and ask the
+  user, naming the exact resource and the exact command.
+- When verification genuinely requires a mutation, perform it on a disposable
+  target you created in this session (a throwaway resource, a preview or
+  staging environment), never on one that existed before the session.
+- "Not production" is not an exemption; a resource's name does not establish
+  its role. Deviation condition: the user names the exact resource and the
+  destructive operation in the current conversation. The
+  `deny-remote-deletion.sh` hook still blocks the literal deletion forms even
+  then — a wanted remote deletion is run by the user, not the agent.
+
 ## Before Committing
 
 Before every commit, check the project's task manifest (`package.json` scripts,
