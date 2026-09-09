@@ -1,8 +1,6 @@
 #!/bin/bash
-# Report which tools and skills Claude Code invoked in recent sessions, and how
-# identifier searches split between grep-class tools and Serena's symbol tools.
+# Report which tools and skills Claude Code invoked in recent sessions.
 # Usage: mise run agent-usage-report [days]   (default 7)
-#        VERBOSE=1 mise run agent-usage-report   also lists every file search
 # Window is file-mtime granularity: a session active within the window is
 # included whole, even if it started earlier.
 set -euo pipefail
@@ -15,79 +13,13 @@ projects="$HOME/.claude/projects"
 # Count tool_use blocks only. A plain grep over the transcript JSONL
 # over-counts: per-session tool definitions and prompt text also contain tool
 # names, which shows up as a near-uniform floor across every tool of a server.
-#
-# Lines emitted:
-#   skill  <name>
-#   tool   <name>
-#   search <kind> <identifier|other> <pattern>
-# A "search" line is a grep-class call that searches files: the Grep tool, or a
-# Bash segment running rg/ag/ack/git grep, or grep with -r or a path argument
-# (a bare `| grep x` filter is not a search). Its pattern is "identifier" when
-# it is a bare name (optionally \b-wrapped); those are the calls the
-# serena-semantic-search rule asks to route through Serena instead.
 usage="$(
   find "$projects" -name '*.jsonl' -newermt "$days days ago" -exec cat {} + |
     jq -Rr '
-      def unquote:
-        if length >= 2 and (test("^'"'"'.*'"'"'$") or test("^\".*\"$")) then .[1:-1] else . end;
-      def ident_class:
-        if (gsub("^\\\\b|\\\\b$"; "") | test("^[A-Za-z_][A-Za-z0-9_]*$")) then "identifier" else "other" end;
-      # Options that consume the next token.
-      def two_arg:
-        test("^-[ABCmgtTfd]$|^--(include|exclude|exclude-dir|glob|iglob|type|type-not|max-count|context|after-context|before-context|file)$");
-      # Walk grep-style arguments: first positional (or -e value) is the pattern,
-      # later positionals are paths; note -r/-R.
-      def walk($t; $acc; $dd):
-        if ($t | length) == 0 then $acc
-        else $t[0] as $a
-        | if $dd or ($a | startswith("-") | not) or $a == "-" then
-            (if $acc.pattern == null then walk($t[1:]; $acc + {pattern: $a}; $dd)
-             else walk($t[1:]; $acc + {paths: ($acc.paths + 1)}; $dd) end)
-          elif $a == "--" then walk($t[1:]; $acc; true)
-          elif $a == "-e" or $a == "--regexp" then
-            walk($t[2:]; $acc + {pattern: ($acc.pattern // $t[1])}; $dd)
-          elif ($a | two_arg) then walk($t[2:]; $acc; $dd)
-          elif ($a | test("^-[a-zA-Z]*[rR]|^--(dereference-)?recursive")) then
-            walk($t[1:]; $acc + {recursive: true}; $dd)
-          else walk($t[1:]; $acc; $dd) end end;
-      # Drop heredoc bodies (<<EOF ... EOF): commit messages and file contents
-      # are not commands, and would otherwise be tokenized as such.
-      def strip_heredocs:
-        reduce (split("\n")[]) as $line ({out: [], term: null};
-          if .term != null then
-            (if ($line | ltrimstr("\t") | rtrimstr(" ")) == .term then .term = null else . end)
-          else
-            .out += [$line]
-            | ([$line | capture("<<-?[ ]*[\\x27\"]?(?<t>[A-Za-z_][A-Za-z0-9_]*)")] | .[0]) as $h
-              | if $h != null then .term = $h.t else . end
-          end)
-        | .out | join("\n");
-      def bash_searches:
-        strip_heredocs
-        | [splits("\\|\\||&&|[|;\n]")]
-        | .[]
-        | [splits("[ \t]+")] | map(select(length > 0))
-        # drop env assignments and wrappers before the command word
-        | until(length == 0 or (.[0] | test("^[A-Za-z_][A-Za-z0-9_]*=|^(sudo|env|command|nohup|time|xargs)$") | not); .[1:])
-        | select(length > 0)
-        | (.[0] | sub(".*/"; "")) as $cmd
-        | if $cmd == "git" and .[1] == "grep" then {kind: "git grep", args: .[2:], files: true}
-          elif $cmd | test("^(rg|ag|ack)$") then {kind: $cmd, args: .[1:], files: true}
-          elif $cmd | test("^(grep|egrep|fgrep)$") then {kind: "grep", args: .[1:], files: false}
-          else empty end
-        | . as $c
-        | walk($c.args; {pattern: null, paths: 0, recursive: false}; false)
-        | select(.pattern != null and ($c.files or .recursive or .paths > 0))
-        | (.pattern | unquote) as $p
-        | "search\t\($c.kind)\t\($p | ident_class)\t\($p)";
       fromjson?
       | .message.content[]?
       | select(.type? == "tool_use")
       | if .name == "Skill" then "skill\t" + (.input.skill? // "?")
-        elif .name == "Grep" then
-          "tool\tGrep", ((.input.pattern? // empty) | "search\tGrep\t\(ident_class)\t\(.)")
-        elif .name == "Bash" then
-          "tool\tBash", ((.input.command? // empty) | bash_searches)
         else "tool\t" + .name end
     '
 )"
@@ -99,18 +31,3 @@ awk -F'\t' '$1 == "skill" { print $2 }' <<<"$usage" | sort | uniq -c | sort -rn
 echo
 echo "## Tools"
 awk -F'\t' '$1 == "tool" { print $2 }' <<<"$usage" | sort | uniq -c | sort -rn
-echo
-echo "## Identifier search: grep-class calls vs Serena symbol tools"
-echo "identifier / all file searches, by tool:"
-awk -F'\t' '$1 == "search" { all[$2]++; if ($3 == "identifier") id[$2]++ }
-  END { for (k in all) printf "%7d / %-5d %s\n", id[k], all[k], k }' <<<"$usage" | sort -rn
-echo "serena symbol tools:"
-awk -F'\t' '$1 == "tool" && $2 ~ /^mcp__serena__(find_symbol|find_referencing_symbols|find_declaration|find_implementations|get_symbols_overview)$/ { print $2 }' <<<"$usage" |
-  sort | uniq -c | sort -rn
-echo "top identifier patterns:"
-awk -F'\t' '$1 == "search" && $3 == "identifier" { print $4 }' <<<"$usage" | sort | uniq -c | sort -rn | head -15
-if [ -n "${VERBOSE:-}" ]; then
-  echo
-  echo "## All file searches (tool, class, pattern)"
-  awk -F'\t' '$1 == "search" { printf "%-9s %-10s %s\n", $2, $3, $4 }' <<<"$usage"
-fi
