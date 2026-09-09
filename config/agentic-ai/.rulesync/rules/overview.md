@@ -32,11 +32,8 @@ reason. Each rule carries its own strength and deviation condition.
   implementation file, lead with a symbol overview rather than a full-file read.
   Literal-text search (strings, error messages, config keys), line-range reads,
   and non-code files stay on plain grep/Read.
-- Design judgment at a scale where opinions can diverge, and any refactoring
-  plan before it is written down: use the `design-review` skill. A refactor is
-  the case the skill most often misses; it preserves the current shape,
-  including shapes with no reason to exist, so what the plan keeps needs the
-  same scrutiny as what it changes. Trivial fixes do not need it.
+- Design or refactoring judgment at a scale where opinions can diverge: use the
+  `design-review` skill. Trivial fixes do not need it.
 - After a multi-iteration change settles — before opening or finalizing a PR —
   or whenever a touched file's annotations narrate development history, point
   at code that has moved, or pack more facts per block than a reader can hold,
@@ -60,14 +57,10 @@ problem first (e.g., a change forces edits across multiple files, tests need dep
 unrelated to what they verify), then apply a principle only when it beats the simpler
 alternatives (inlining, a helper function, deletion). When in doubt, choose the simpler
 option. Do not add abstractions, layers, or interfaces for speculative future
-requirements (YAGNI).
-
-Refactoring preserves behavior, including behavior with no reason to exist: a dead
-parameter, a fallback arm that never fires, a rule nobody asked for. Before a plan
-keeps such a shape, confirm it is live (callers, fixtures, sibling call sites).
-Whether a rule *should* exist is not readable from the code; when the code cannot
-answer, ask instead of preserving. The `design-review` skill is the procedural form
-of this section.
+requirements (YAGNI). Refactoring preserves behavior, including behavior with no
+reason to exist: a shape the plan keeps needs evidence it is live, and whether a rule
+*should* exist is a question for the user, not something the code can answer. The
+`design-review` skill is the procedural form of this section.
 
 ## Comments
 
