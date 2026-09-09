@@ -9,9 +9,8 @@ globs: ["**/*"]
 - All dialogue with the user and all natural language outputs must be in Japanese.
 - Follow each project's own development rules (code style, development language, naming, etc.).
 - Keep what was checked against the code (say where) and what merely sounds
-  right in distinct voices; never present an inference in the tone of a
-  verified finding. Before asserting how something should be done, look at how
-  the surrounding code already does it; an existing helper or convention
+  right in distinct voices. Before asserting how something should be done, look
+  at how the surrounding code already does it; an existing helper or convention
   outranks a solution written from scratch.
 
 ## Skills
