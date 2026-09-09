@@ -1,6 +1,5 @@
 .claude/settings.local.json
 .playwright-cli
-.serena
 .tool-versions
 .vim
 worktree
