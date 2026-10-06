@@ -20,17 +20,17 @@ reason. Each rule carries its own strength and deviation condition.
 
 - File/directory deletion: in a git working tree, always use the `safety-deletion`
   skill (`git rm` for tracked paths, `git clean` for untracked/ignored ones)
-  instead of `rm`, `find -delete`, etc. Untracked is not an exemption. Avoid
-  needing deletion at all: create scratch/temp files under `$TMPDIR`
-  (`mktemp -d`), not the working tree; files there need no cleanup.
+  instead of `rm`, `find -delete`, etc. Untracked is not an exemption. Scratch
+  files belong under `$TMPDIR` (see Deliverables); they need no deletion.
 - Design or refactoring judgment at a scale where opinions can diverge: use the
   `design-review` skill. Trivial fixes do not need it.
-- After a multi-iteration change settles — before opening or finalizing a PR —
-  or whenever a touched file's annotations narrate development history, point
-  at code that has moved, or pack more facts per block than a reader can hold,
-  use the `comment-pruning` skill to re-judge them against the Comments policy
-  below. Do not run it mid-implementation; pruning while the code is still
-  moving causes churn.
+- After a multi-iteration change settles — before opening or finalizing a PR,
+  or before handing over a document the task produced — or whenever a touched
+  file narrates development history, carries working notes, points at code
+  that has moved, or packs more facts per block than a reader can hold, use
+  the `comment-pruning` skill to re-judge it against the Deliverables and
+  Comments policies below. Do not run it mid-implementation or mid-draft;
+  pruning while the text is still moving causes churn.
 
 ## Before Committing
 
@@ -53,6 +53,20 @@ reason to exist: a shape the plan keeps needs evidence it is live, and whether a
 *should* exist is a question for the user, not something the code can answer. The
 `design-review` skill is the procedural form of this section.
 
+## Deliverables
+
+A file the task produces or revises — code, docs, a report, a plan — shows its
+current state only; the path to that state is not part of it.
+
+- When a conclusion changes, replace the earlier text. Do not append a
+  correction, an "update:" note, or a second option beside the first.
+- Working notes ("revisit later", "tried A, chose B", "draft") go to the chat
+  or to a scratch file under `$TMPDIR` (`mktemp -d`), never into the deliverable.
+- Rationale that must survive goes to the commit message, the PR description,
+  or an ADR. A rejected alternative stays in the document only where the
+  document exists to record the decision, stated as a comparison, not a trail.
+- Before handing a deliverable over, re-read it whole as its reader would.
+
 ## Comments
 
 Judge a comment by "reader's effort saved at that spot" vs "noise + drift cost" — not by
@@ -67,9 +81,9 @@ the what/why dichotomy. Three layers:
 
 Design provenance (who decided what, when, and why) belongs in ADR / PR / commit
 messages, not in code — except when it doubles as a Guard comment (layer 1). The
-`comment-pruning` skill is the procedural form of this section; its
-`references/classification.md` is the canonical detailed rubric (criteria, signals,
-worked examples).
+`comment-pruning` skill is the procedural form of this section and of
+Deliverables; its `references/classification.md` is the canonical detailed
+rubric (criteria, signals, worked examples).
 
 ## Dependency Injection
 
