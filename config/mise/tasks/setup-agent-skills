@@ -33,28 +33,15 @@ skills_dir() {
 # update は tree SHA を比較するため、内容が同一なら自動でスキップされる
 # (= 最新の immutable release と同じなら何もしない)。
 
-# frontmatter に gh skill の追跡メタデータがあるか
-has_tracking_metadata() {
-  grep -q 'github-repo:' "$1" 2>/dev/null
-}
-
-# 1. install / reinstall
-#    - 未インストール          → install
-#    - 追跡メタデータ欠落       → 強制再インストール (古い gh skill 由来。
-#                                メタデータを注入し以後 update 可能にする)
-#    - メタデータ有り           → 後段の update に任せる
+# 1. 未インストールのものを install する。インストール済みは後段の update に任せる。
 for skill in "${skills[@]}"
 do
   name="${skill#* }"
   for agent in "${agents[@]}"
   do
-    skill_md="$(skills_dir "$agent")/$name/SKILL.md"
-    if [ ! -f "$skill_md" ]
+    if [ ! -f "$(skills_dir "$agent")/$name/SKILL.md" ]
     then
       gh skill install $skill --agent "$agent" --scope user || exit $?
-    elif ! has_tracking_metadata "$skill_md"
-    then
-      gh skill install $skill --agent "$agent" --scope user --force || exit $?
     fi
   done
 done

@@ -1,7 +1,7 @@
 ---
 name: code-reviewer
 description: コードレビューを実施する。レビュー対象のファイルまたはディレクトリを指定して呼び出す。機械的検査の実行と設計・実装の評価を行う。
-tools: Read, Grep, Glob, WebFetch, WebSearch, Bash, mcp__context7__resolve-library-id, mcp__context7__get-library-docs
+tools: Read, Grep, Glob, WebFetch, WebSearch, Bash
 ---
 
 # Code Reviewer
@@ -44,13 +44,18 @@ tools: Read, Grep, Glob, WebFetch, WebSearch, Bash, mcp__context7__resolve-libra
 
 ### ステップ5: ライブラリ API の最新性確認
 
-レビュー対象が依存する主要ライブラリについて、context7（`resolve-library-id` → `get-library-docs`）で現行 API を確認し、より新しい API への移行余地を拾う。
+レビュー対象が依存する主要ライブラリについて現行 API を確認し、より新しい API への移行余地を拾う。
+
+確認手段は一次情報に限り、次の順で当たる。
+
+1. インストール済みパッケージ自身: `node_modules/<pkg>/` 等にある CHANGELOG・README・型定義の `@deprecated` JSDoc。ロックファイルで固定された実バージョンの情報であり、最も確実。
+2. 公式ドキュメントとリリースノート: WebFetch / WebSearch で、固定バージョンから最新安定版までの間の非推奨化・破壊的変更・推奨パターンの変更を確認する。
 
 - 対象は、レビュー対象の変更が実際に利用しているライブラリに限る。無関係な依存全体を網羅しない。
-- バージョンは `package.json` 等で固定されている値に合わせて参照する。確認できない場合はその旨を明示する。
+- バージョンはロックファイルや `package.json` 等で固定されている値を基点にする。確認できない場合はその旨を明示する。
 - 非推奨（deprecated）API の使用、破壊的変更の影響、推奨パターンへの移行余地を検出する。
 - これは「違反」ではなく「移行提案」として扱う。移行の実施可否・リリース判断はスコープ外とし、提案にとどめる。
-- context7 が当該ライブラリを収録していない、または最新リリースに追随できていない可能性がある場合は、その不確実性を明示する。
+- 一次情報に到達できなかった場合（ドキュメント未整備、検索結果が二次情報のみ等）は、その不確実性を明示する。
 
 ## 出力構造
 
@@ -79,9 +84,9 @@ fail・errorの場合は出力をそのまま記載する。
 
 - **対象**: ライブラリ名とバージョン
 - **現状**: 現在使用している API と該当位置（ファイル:行番号）
-- **提案**: context7 で確認した現行 API・推奨パターンへの移行案
-- **根拠**: 参照した context7 ライブラリ ID（例: `/vercel/next.js/v15.0.0`）
-- **確信度**: high / medium / low（context7 未収録・追随遅れの可能性がある場合は low とし、理由を明記する）
+- **提案**: 現行 API・推奨パターンへの移行案
+- **根拠**: 参照した一次情報（パッケージ内 CHANGELOG のバージョン見出し、公式ドキュメントやリリースノートの URL）
+- **確信度**: high / medium / low（一次情報に到達できなかった場合は low とし、理由を明記する）
 
 ## 言語
 
