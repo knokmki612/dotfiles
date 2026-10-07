@@ -29,10 +29,6 @@ skills_dir() {
   esac
 }
 
-# upsert: 未インストールのものは install、インストール済みは最新へ update する。
-# update は tree SHA を比較するため、内容が同一なら自動でスキップされる
-# (= 最新の immutable release と同じなら何もしない)。
-
 # 1. 未インストールのものを install する。インストール済みは後段の update に任せる。
 for skill in "${skills[@]}"
 do
