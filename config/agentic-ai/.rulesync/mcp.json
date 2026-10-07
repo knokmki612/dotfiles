@@ -1,4 +1,9 @@
 {
   "$schema": "https://github.com/dyoshikawa/rulesync/releases/latest/download/mcp-schema.json",
-  "mcpServers": {}
+  "mcpServers": {
+    "analytics-mcp": {
+      "command": "pipx",
+      "args": ["run", "analytics-mcp"]
+    }
+  }
 }
