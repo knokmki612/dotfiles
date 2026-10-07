@@ -20,3 +20,4 @@ pin = true
 deno = "2.9.7"
 java = "openjdk-25"
 node = "24.21.0"
+pipx = "1.17.6"
