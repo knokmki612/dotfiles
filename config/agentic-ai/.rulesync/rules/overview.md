@@ -41,6 +41,15 @@ unless the failure pre-exists the change and is unrelated (say so explicitly).
 Deviation condition: when the full test suite is too heavy, run only the tests
 relevant to the change and state that you narrowed the scope.
 
+## Agent Attribution
+
+Mark work the agent performed as such, in every tool. Never omit it, even when
+the tool does not add it by default or its settings turn it off.
+
+- Commits: end the message with a `Co-authored-by: <agent> <email>` trailer.
+- Posts (PR/issue descriptions, comments, reviews): end the body with a
+  `Generated with <agent>` footer.
+
 ## Design Principles
 
 Design principles (SOLID, DRY, patterns, etc.) are tools, not goals. Identify a concrete
