@@ -1,7 +1,15 @@
 {
   "$schema": "https://github.com/dyoshikawa/rulesync/releases/latest/download/config-schema.json",
-  "targets": ["copilot", "claudecode", "codexcli", "opencode"],
-  "features": ["rules", "ignore", "mcp", "subagents"],
+  // permissions is limited to Claude Code and OpenCode: Codex turns bash
+  // patterns into prefix_rule tokens where "*" is a literal argument (and
+  // rewrites approval settings in config.toml), and Copilot has no global
+  // permissions output.
+  "targets": {
+    "copilot": ["rules", "mcp", "subagents"],
+    "claudecode": ["rules", "mcp", "subagents", "permissions"],
+    "codexcli": ["rules", "mcp", "subagents"],
+    "opencode": ["rules", "mcp", "subagents", "permissions"],
+  },
   "outputRoots": ["."],
   "delete": true,
   "verbose": true,
