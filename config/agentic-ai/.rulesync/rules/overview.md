@@ -48,7 +48,10 @@ the tool does not add it by default or its settings turn it off.
 
 - Commits: end the message with a `Co-authored-by: <agent> <email>` trailer.
 - Posts (PR/issue descriptions, comments, reviews): end the body with a
-  `Generated with <agent>` footer.
+  `🤖 Generated with <agent>` footer.
+
+Add exactly one of each: when the tool or the posting integration already
+appends an attribution, do not add another.
 
 ## Design Principles
 
