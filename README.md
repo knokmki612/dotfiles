@@ -35,7 +35,8 @@ in `~/.dotfileignore`.
    mise install
    ```
 
-3. Generate AI agent configs (rules, subagents), install agent skills, and
+3. Generate AI agent configs (rules, subagents, permissions), install agent
+   skills, and
    install Claude Code plugins:
 
    ```sh
@@ -50,9 +51,10 @@ in `~/.dotfileignore`.
 - `config/` — XDG configs (`~/.config/…`): mise, bspwm, sxhkd, and
   `agentic-ai` (the rulesync source for Claude Code / Codex / Copilot /
   OpenCode)
-- `claude/settings.override.json` — repo-managed Claude Code permissions and
-  hooks, merged into `~/.claude/settings.json` by bashrc; hook scripts live in
-  `claude/hooks/`
+- `claude/settings.override.json` — repo-managed Claude Code hooks, merged
+  into `~/.claude/settings.json` by bashrc; hook scripts live in
+  `claude/hooks/`. Permissions come from rulesync instead
+  (`config/agentic-ai/.rulesync/permissions.jsonc`, Claude Code and OpenCode)
 - `local/bin/` — small utility scripts (`~/.local/bin/…`)
 - `var/app/` — Flatpak app configs (VS Code)
 
