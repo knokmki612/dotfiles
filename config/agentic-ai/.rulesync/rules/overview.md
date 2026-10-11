@@ -32,6 +32,23 @@ reason. Each rule carries its own strength and deviation condition.
   Comments policies below. Do not run it mid-implementation or mid-draft;
   pruning while the text is still moving causes churn.
 
+## Observation and Mutation
+
+Observing facts to reduce guesswork applies to specifications, not to effects.
+What to read is the API's documentation, its OpenAPI schema, `--help`, or the
+tool's description — never the result of invoking an endpoint whose behavior is
+unknown. When no specification can be found, ask the user; do not call to find
+out.
+
+A call that is not read-only (anything other than GET/HEAD/OPTIONS, a
+`list`/`get`/`read` operation, or an explicit dry-run) is a mutation, whatever
+its stated purpose. Make a mutation only when one of these holds, and say which:
+
+- The result is known to be recoverable — soft delete / trash, version history,
+  an undo, or a disposable test environment — and the recovery path was checked,
+  not assumed.
+- The user has explicitly approved this specific call.
+
 ## Before Committing
 
 Before every commit, check the project's task manifest (`package.json` scripts,
