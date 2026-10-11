@@ -17,7 +17,7 @@ skills=(
   "knokmki612/skills wip-commit-organization"
   "microsoft/playwright-cli playwright-cli"
 )
-agents=(claude-code codex github-copilot)
+agents=(claude-code codex github-copilot opencode)
 
 # agent ごとのユーザースコープ skills ディレクトリ
 skills_dir() {
@@ -25,6 +25,7 @@ skills_dir() {
     claude-code)    echo "$HOME/.claude/skills" ;;
     codex)          echo "$HOME/.codex/skills" ;;
     github-copilot) echo "$HOME/.copilot/skills" ;;
+    opencode)       echo "$HOME/.config/opencode/skills" ;;
     *) return 1 ;;
   esac
 }

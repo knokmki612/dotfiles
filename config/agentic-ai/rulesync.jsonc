@@ -1,6 +1,6 @@
 {
   "$schema": "https://github.com/dyoshikawa/rulesync/releases/latest/download/config-schema.json",
-  "targets": ["copilot", "claudecode", "codexcli"],
+  "targets": ["copilot", "claudecode", "codexcli", "opencode"],
   "features": ["rules", "ignore", "mcp", "subagents"],
   "outputRoots": ["."],
   "delete": true,
