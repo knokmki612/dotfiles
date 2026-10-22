@@ -24,12 +24,12 @@ reason. Each rule carries its own strength and deviation condition.
   files belong under `$TMPDIR` (see Deliverables); they need no deletion.
 - Design or refactoring judgment at a scale where opinions can diverge: use the
   `design-review` skill. Trivial fixes do not need it.
-- The `adversarial-verification` skill runs when the user asks for it. Start it
-  unasked only in a longer task, at the point where the work has come to rest on
-  a stack of untested assumptions — a fix built on a root-cause hypothesis nobody
-  ran, a conclusion that depends on several earlier `inferred` claims — and the
-  next step would report that work as done. Do not run it on every "fixed"; a
-  change pinned by a test that fails on revert needs no more than that test.
+- In a longer task, once the work has come to rest on a stack of untested
+  assumptions — a fix built on a root-cause hypothesis nobody ran, a conclusion
+  that depends on several earlier `inferred` claims — and the next step would
+  report that work as done, use the `adversarial-verification` skill. Not on
+  every "fixed"; a change pinned by a test that fails on revert needs no more
+  than that test.
 - After a multi-iteration change settles — before opening or finalizing a PR,
   or before handing over a document the task produced — or whenever a touched
   file narrates development history, carries working notes, points at code
