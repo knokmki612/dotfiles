@@ -102,18 +102,3 @@ messages, not in code — except when it doubles as a Guard comment (layer 1). T
 `comment-pruning` skill is the procedural form of this section and of
 Deliverables; its `references/classification.md` is the canonical detailed
 rubric (criteria, signals, worked examples).
-
-## Dependency Injection
-
-- Inject only external boundaries: network, time, environment variables, logging.
-- Import pure functions and domain logic directly; do not inject them.
-- For fs, use the real module when tests can use a temporary directory (mkdtemp).
-- Do not add intermediate interfaces or wrappers that exist only for tests. When a mock
-  starts to reimplement production logic, it is a sign to revisit the design.
-
-## Error Handling
-
-- Let errors propagate by default; do not catch, log, and rethrow.
-- Wrap with `new Error(msg, { cause })` only where context (which target failed) is needed.
-- Centralize error logging in one place at the entry point (the `main` catch).
-- Emit a warning on the spot only when processing continues after a catch.
