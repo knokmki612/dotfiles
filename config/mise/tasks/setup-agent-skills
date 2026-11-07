@@ -15,6 +15,7 @@ skills=(
   "knokmki612/skills design-review"
   "knokmki612/skills docs-restructuring"
   "knokmki612/skills safety-deletion"
+  "knokmki612/skills ui-object-model"
   "knokmki612/skills wip-commit-organization"
   "microsoft/playwright-cli playwright-cli"
 )
