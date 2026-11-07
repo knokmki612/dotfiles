@@ -30,11 +30,6 @@ reason. Each rule carries its own strength and deviation condition.
   report that work as done, use the `adversarial-verification` skill. Not on
   every "fixed"; a change pinned by a test that fails on revert needs no more
   than that test.
-- Before changing, porting, or comparing a UI design that someone else made,
-  right after a hearing with its designer, and the moment you decide to replace
-  one of its structural components (accordion, tabs, expandable list items)
-  with a different structure, use the `ui-object-model` skill. Not when
-  designing a UI from scratch.
 - After a multi-iteration change settles — before opening or finalizing a PR,
   or before handing over a document the task produced — or whenever a touched
   file narrates development history, carries working notes, points at code
