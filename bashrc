@@ -42,7 +42,7 @@ command -v toolbox >/dev/null 2>&1 && {
     | tail -n 1)"
   [[ -n "$latest_ubuntu_toolbox" ]] && {
     alias playwright-cli="toolbox run -c $latest_ubuntu_toolbox playwright-cli"
-    alias tbpnpm="toolbox run -c $latest_ubuntu_toolbox env CHROME_PATH=\$HOME/.local/bin/google-chrome-toolbox pnpm"
+    alias tbpnpm="toolbox run -c $latest_ubuntu_toolbox env CHROME_PATH=\$HOME/.local/bin/google-chrome-toolbox LANG=ja_JP.utf-8 pnpm"
   }
   unset latest_ubuntu_toolbox
 }
