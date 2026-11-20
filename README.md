@@ -29,16 +29,6 @@ Personal dotfiles, managed by [dotfile-installer](https://github.com/knokmki612/
    Afterwards dotfile-installer is pinned in `config/mise/config.toml`, so
    re-linking is just `dotfile-installer` in this directory.
 
-   The installer is also kept as a git submodule (cloned over SSH, so an SSH
-   key registered with GitHub is needed). With it, the classic flow still
-   works:
-
-   ```sh
-   git clone --recurse-submodules git@github.com:knokmki612/dotfiles.git
-   cd dotfiles
-   ./install.sh
-   ```
-
 dotfile-installer symlinks every file in this repository to `~/.<path>` with
 a dot prefix (e.g. `bashrc` → `~/.bashrc`, `config/mise/config.toml` →
 `~/.config/mise/config.toml`). List files you don't want linked on a machine
